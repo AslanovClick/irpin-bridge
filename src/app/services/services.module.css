@@ -1,0 +1,133 @@
+/* ── Хаб: картки послуг ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--c-paper);
+  border: 2px solid var(--c-black);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 0 var(--c-black);
+}
+
+.cardMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--c-gray-100);
+}
+
+.cardMedia img {
+  object-fit: cover;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 20px;
+}
+
+.cardTitle {
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+}
+
+.cardText {
+  flex: 1;
+  color: var(--c-gray-700);
+}
+
+.cardFoot {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-weight: var(--fw-black);
+}
+
+/* ── Порівняння ── */
+
+
+
+
+
+/* ── Сторінка послуги ── */
+
+
+
+
+
+.reqBox {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(20px, 3vw, 32px);
+  border: 2px solid var(--c-black);
+  background: var(--c-paper);
+}
+
+.price {
+  border-top: 2px solid var(--c-black);
+}
+
+.price li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.price strong {
+  font-family: var(--font-heading);
+}
+
+.price span {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.price b {
+  font-family: var(--font-heading);
+  grid-row: span 2;
+  align-self: center;
+  font-size: 1.25rem;
+  font-weight: var(--fw-black);
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.formIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

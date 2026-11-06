@@ -1,0 +1,121 @@
+.types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 10px 10px 16px;
+  border: 2px solid var(--c-gray-300);
+  background: var(--c-paper);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.type[data-on] {
+  border-color: var(--c-black);
+}
+
+/* Вся плитка — це підпис чекбокса: клік будь-де вмикає тип. Після вибору справа з'являється лічильник */
+.type > label {
+  display: flex;
+  flex: 1;
+  align-self: stretch;
+  align-items: center;
+  margin: -10px 0 -10px -16px;
+  padding: 10px 0 10px 16px;
+  cursor: pointer;
+}
+
+.type:not([data-on]) > label {
+  margin-right: -10px;
+  padding-right: 10px;
+}
+
+.type:not([data-on]):hover {
+  border-color: var(--c-gray-500);
+}
+
+.type strong {
+  font-family: var(--font-heading);
+}
+
+.total {
+  font-size: 0.9375rem;
+}
+
+.total strong {
+  font-family: var(--font-heading);
+}
+
+.total a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Крок 2: логотип і терміни — дві картки поруч */
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--c-gray-300);
+  background: var(--c-paper);
+}
+
+@media (max-width: 760px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .block {
+    padding: 16px;
+  }
+}
+
+.next {
+  padding: 16px 18px;
+  background: var(--c-sky);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.next strong {
+  font-family: var(--font-heading);
+}
+
+.asideNote {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  background: var(--c-sky);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.asideMark {
+  flex: none;
+  width: 20px;
+  color: var(--c-blue);
+}
+
+@media (max-width: 640px) {
+  .types {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flex {
+    margin-top: 0;
+    min-height: 0;
+  }
+}

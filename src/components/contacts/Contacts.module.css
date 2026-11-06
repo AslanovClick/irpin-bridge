@@ -1,0 +1,371 @@
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: var(--gap);
+  align-items: stretch;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: clamp(20px, 2.4vw, 28px);
+  background: var(--surface);
+}
+
+.card[data-wide] {
+  grid-column: span 2;
+}
+
+.cardLabel {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.big {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.card:not([data-wide]) .big {
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
+  white-space: nowrap;
+}
+
+a.big:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.muted {
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.chips a {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 2px solid var(--c-black);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.chips a:hover {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.hoursHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  width: 100%;
+}
+
+.openNow {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: var(--c-gray-300);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.openNow > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-gray-700);
+}
+
+.openNow[data-open] {
+  background: var(--c-lime);
+}
+
+.openNow[data-open] > span {
+  background: var(--c-pine);
+}
+
+.hours {
+  width: 100%;
+  margin: 0;
+}
+
+.hours > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: center;
+  padding: 12px;
+  margin-inline: -12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hours > div:last-child {
+  border-bottom: 0;
+}
+
+/* Сьогоднішній день — підсвічуємо весь рядок, а не вставляємо бейдж у текст */
+.hours > div:has(.today) {
+  border-bottom-color: transparent;
+  background: var(--c-white);
+  box-shadow: inset 3px 0 0 var(--c-black);
+}
+
+.hours dt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.35;
+}
+
+.hours dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.today {
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-pine);
+}
+
+/* ── Карта ── */
+.map {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background: var(--c-pine);
+}
+
+.map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mapCover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  color: var(--c-lime);
+}
+
+/* Стилізована «карта»: сітка вулиць фірмовими лініями */
+.mapGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 46%, rgb(213 242 102 / 0.18) 46% 48%, transparent 48%),
+    linear-gradient(0deg, transparent 0 58%, rgb(213 242 102 / 0.18) 58% 60%, transparent 60%),
+    linear-gradient(28deg, transparent 0 30%, rgb(213 242 102 / 0.12) 30% 31.5%, transparent 31.5%),
+    repeating-linear-gradient(90deg, rgb(213 242 102 / 0.06) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(0deg, rgb(213 242 102 / 0.06) 0 1px, transparent 1px 48px);
+}
+
+.mapPin {
+  position: absolute;
+  top: calc(58% - 64px);
+  left: calc(47% - 28px);
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: var(--c-lime);
+  color: var(--c-pine);
+  clip-path: polygon(0 0, 100% 0, 100% 76%, 62% 76%, 50% 100%, 38% 76%, 0 76%);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.mapCover:hover .mapPin {
+  transform: translateY(-4px);
+}
+
+.mapLabel {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  background: var(--c-white);
+  color: var(--c-black);
+  text-align: left;
+}
+
+.mapLabel strong {
+  font-family: var(--font-heading);
+}
+
+.mapLabel span {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.mapCover:focus-visible {
+  outline: 3px solid var(--c-lime);
+  outline-offset: -6px;
+}
+
+/* ── Як дістатися ── */
+.ways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.ways li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 2px solid var(--c-black);
+}
+
+.wayIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 6px;
+  background: var(--c-black);
+  color: var(--c-lime);
+}
+
+.ways h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.ways p {
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+/* ── Соцмережі ── */
+.groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  background: var(--surface);
+}
+
+.group h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.group p {
+  margin-bottom: 12px;
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.group a {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  font-weight: var(--fw-bold);
+}
+
+.group a span {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.group a:hover {
+  border-color: var(--c-lime);
+  color: var(--c-lime);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 1000px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .map {
+    min-height: 320px;
+  }
+
+  .groups,
+  .ways {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card[data-wide] {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,174 @@
+.card {
+  /* relative — щоб приховані підписи (.visually-hidden) не «випадали» зі слайдерів і не розширювали сторінку */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--c-gray-100);
+}
+
+.img {
+  object-fit: cover;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform 700ms var(--ease);
+}
+
+.imgHover {
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  .media:hover .imgHover {
+    opacity: 1;
+  }
+
+  .media:hover .img {
+    transform: scale(1.03);
+  }
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.placeholderMark {
+  width: 46%;
+  transition: transform 700ms var(--ease);
+}
+
+.media:hover .placeholderMark {
+  transform: scale(1.06);
+}
+
+.placeholderNote {
+  font-family: var(--font-heading);
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 3px 8px;
+  background: rgb(249 249 249 / 0.92);
+  color: var(--c-black);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+}
+
+.badge {
+  font-family: var(--font-heading);
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 9px 4px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+.badge-new {
+  background: var(--c-lime);
+}
+
+.badge-hit,
+.badge-art {
+  background: var(--c-white);
+}
+
+.badge-sale {
+  background: var(--c-orange);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-heading);
+}
+
+.title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.price {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 1.125rem;
+  font-weight: var(--fw-black);
+  letter-spacing: 0;
+}
+
+.oldPrice {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+.swatches {
+  display: flex;
+  gap: 5px;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  box-shadow: inset 0 0 0 1px rgb(17 17 17 / 0.2);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+.custom {
+  font-size: var(--fs-caption);
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #2f9e5b;
+}
+
+/* На кольоровому фоні */
+.onColor .media {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.onColor .swatch {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4);
+}

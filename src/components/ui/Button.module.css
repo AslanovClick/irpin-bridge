@@ -1,0 +1,91 @@
+.btn {
+  font-family: var(--font-heading);
+  --_h: 52px;
+  --_px: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: var(--_h);
+  padding: 0 var(--_px);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body);
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.sm {
+  --_h: 40px;
+  --_px: 16px;
+  font-size: var(--fs-small);
+}
+
+.lg {
+  --_h: 60px;
+  --_px: 32px;
+  font-size: 1.0625rem;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+.arrow {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Основна: кольори беруться з теми секції */
+.primary {
+  background: var(--btn-bg, var(--c-black));
+  color: var(--btn-fg, var(--c-white));
+}
+
+.primary:hover {
+  background: var(--btn-hover-bg, var(--c-lime));
+  color: var(--btn-hover-fg, var(--c-black));
+}
+
+/* Контурна */
+.outline {
+  border-color: currentColor;
+  color: var(--fg, var(--c-black));
+}
+
+.outline:hover {
+  background: var(--fg, var(--c-black));
+  color: var(--bg, var(--c-white));
+  border-color: var(--fg, var(--c-black));
+}
+
+/* Текстове посилання зі стрілкою */
+.link {
+  --_px: 0;
+  min-height: auto;
+  padding-block: 6px;
+  border: 0;
+  border-bottom: 2px solid currentColor;
+  color: var(--fg, var(--c-black));
+}
+
+.link:hover {
+  color: var(--accent, var(--c-black));
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

@@ -1,0 +1,44 @@
+.wrap {
+  padding-block: clamp(20px, 2.5vw, 32px) clamp(48px, 6vw, 96px);
+}
+
+.artist {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: var(--split-gap);
+  align-items: center;
+}
+
+.artistPhoto {
+  max-width: 420px;
+}
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px var(--gap);
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 1100px) {
+  .related {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .artist {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .artistPhoto {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .related {
+    gap: 32px 12px;
+  }
+}

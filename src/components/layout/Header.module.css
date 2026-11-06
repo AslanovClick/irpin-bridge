@@ -1,0 +1,547 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-white);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+  --fg: var(--c-black);
+  --bg: var(--c-white);
+}
+
+/* При скролі — напівпрозорий фон з розмиттям того, що під шапкою */
+.scrolled {
+  background: rgb(249 249 249 / 0.72);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  backdrop-filter: saturate(1.6) blur(18px);
+  border-bottom-color: rgb(17 17 17 / 0.1);
+}
+
+/* Без підтримки backdrop-filter — майже непрозорий фон, щоб текст не губився */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .scrolled {
+    background: rgb(249 249 249 / 0.97);
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: var(--header-h);
+}
+
+.logo {
+  flex: none;
+  display: block;
+  width: 108px;
+  color: var(--c-black);
+}
+
+/* ── Десктоп-навігація ── */
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navList > li {
+  position: relative;
+}
+
+.navLink {
+  font-family: var(--font-heading);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--header-h);
+  padding: 0 12px;
+  font-weight: var(--fw-bold);
+  font-size: 0.9375rem;
+  letter-spacing: 0;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 24px;
+  height: 3px;
+  background: var(--c-black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.navLink:hover::after,
+.navLink[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.chev {
+  transition: transform var(--dur) var(--ease);
+}
+
+.hasDrop:not([data-closed]):hover .chev,
+.hasDrop:not([data-closed]):focus-within .chev {
+  transform: rotate(180deg);
+}
+
+/* Випадне меню послуг */
+.drop {
+  position: absolute;
+  top: 100%;
+  left: -12px;
+  padding-top: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    visibility 0s linear var(--dur-fast);
+}
+
+.hasDrop:not([data-closed]):hover .drop,
+.hasDrop:not([data-closed]):focus-within .drop {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.dropList {
+  width: 340px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* Обводка й тінь — щоб меню не зливалося з зеленим hero сторінок послуг */
+  border: 1px solid rgb(213 242 102 / 0.45);
+  box-shadow:
+    0 0 0 4px rgb(17 17 17 / 0.06),
+    0 18px 40px rgb(17 17 17 / 0.28);
+}
+
+.dropLink {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.dropLink:hover {
+  background: var(--surface);
+}
+
+.dropTitle {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-black);
+  font-size: 1.0625rem;
+}
+
+.dropNote {
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.dropAll {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 14px;
+  border-top: 1px solid var(--line);
+  font-weight: var(--fw-bold);
+}
+
+/* ── Дії праворуч ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.cta {
+  margin-right: 8px;
+}
+
+.iconBtn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.iconBtn:hover {
+  background: var(--c-gray-100);
+}
+
+.count {
+  font-family: var(--font-heading);
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  background: var(--c-lime);
+  color: var(--c-black);
+  font-size: 11px;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--c-white);
+}
+
+.burger {
+  display: none;
+}
+
+/* ── Мобільне меню ── */
+.panel {
+  position: fixed;
+  inset: var(--panel-top, var(--header-h)) 0 0 0;
+  z-index: 49;
+  background: var(--c-white);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.panel[data-open="true"] {
+  animation: panelIn var(--dur) var(--ease);
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.panelInner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100%;
+  padding-block: 16px 24px;
+}
+
+.panel[data-open="true"] .mItem {
+  animation: itemIn 360ms var(--ease) both;
+}
+
+.panel[data-open="true"] .mItem:nth-child(2) { animation-delay: 40ms; }
+.panel[data-open="true"] .mItem:nth-child(3) { animation-delay: 80ms; }
+.panel[data-open="true"] .mItem:nth-child(4) { animation-delay: 120ms; }
+
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Пошук — як поле вводу */
+.mSearch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 2px solid var(--c-black);
+  background: var(--c-paper);
+  color: var(--c-gray-700);
+  text-align: left;
+}
+
+/* Основні розділи */
+.mList {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--c-black);
+}
+
+.mItem {
+  border-bottom: 1px solid rgb(17 17 17 / 0.12);
+}
+
+.mRow {
+  display: flex;
+  align-items: center;
+}
+
+.mLink {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.mTile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+}
+
+.mTile svg {
+  width: 26px;
+  color: var(--accent);
+}
+
+.mText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mLabel {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: var(--fw-black);
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.mLink[aria-current="page"] .mLabel {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.mNote {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.mArrow {
+  flex: none;
+  margin-right: 4px;
+  color: var(--c-gray-500);
+}
+
+.mToggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-right: -10px;
+  transition: transform var(--dur) var(--ease);
+}
+
+.mToggle[aria-expanded="true"] {
+  transform: rotate(180deg);
+}
+
+.mSub {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 12px 62px;
+  border-left: 2px solid var(--c-pine);
+}
+
+.mSub[hidden] {
+  display: none;
+}
+
+.mSub a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0 10px 14px;
+}
+
+.mSub a > span:first-child {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+/* Другорядні посилання — компактна сітка */
+/* Другорядні посилання — плитки 2 × 2 з іконками */
+.mSecondary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mSecTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-gray-700);
+}
+
+.mSecondary ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mSecondary a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-gray-300);
+  background: var(--c-paper);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.mSecondary a:hover,
+.mSecondary a[aria-current="page"] {
+  border-color: var(--c-black);
+}
+
+.mSecIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--c-gray-100);
+}
+
+.mSecondary a[aria-current="page"] .mSecIcon {
+  background: var(--c-lime);
+}
+
+.mSecText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.mSecText strong {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  line-height: 1.2;
+}
+
+.mSecText span {
+  font-size: var(--fs-caption);
+  line-height: 1.3;
+  color: var(--c-gray-700);
+}
+
+/* Нижній блок заявки */
+.mFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: auto;
+  padding: 20px;
+}
+
+.mFootTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mContacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mContacts > a {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: var(--fw-bold);
+}
+
+.mCallback {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mSocials {
+  display: flex;
+  gap: 6px;
+}
+
+.mSocials a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--c-black);
+  color: var(--c-lime);
+}
+
+@media (max-width: 1360px) {
+  .cta {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: inline-grid;
+  }
+
+  /* На мобільному кнопки-іконки — повна зона натиску */
+  .iconBtn {
+    width: var(--tap);
+    height: var(--tap);
+  }
+
+  .count {
+    top: 6px;
+    right: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-h: 72px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+}

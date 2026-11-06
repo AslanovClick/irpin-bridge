@@ -1,0 +1,641 @@
+.page {
+  padding-block: clamp(20px, 2.5vw, 32px) var(--section-y);
+}
+
+.title {
+  margin-block: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 36px);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Крок ── */
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0 28px;
+  border-top: 2px solid var(--c-black);
+}
+
+.stepTitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+}
+
+.stepTitle span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--c-lime);
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px var(--gap);
+  align-items: start;
+}
+
+/* ── Поля ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field label {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.optional {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  color: var(--c-gray-700);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 2px solid var(--c-gray-300);
+  border-radius: 0;
+  background: var(--c-paper);
+  font-size: 1rem;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-color: var(--c-gray-500);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--c-black);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--c-error);
+}
+
+.field textarea::placeholder {
+  color: var(--c-gray-500);
+}
+
+.hint {
+  font-size: var(--fs-caption);
+  color: var(--c-gray-700);
+}
+
+.error {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--c-error);
+}
+
+/* ── Картки вибору (доставка, оплата) ── */
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.option {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid var(--c-gray-300);
+  background: var(--c-paper);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.option:hover {
+  border-color: var(--c-gray-500);
+}
+
+.option:has(input:checked) {
+  border-color: var(--c-black);
+  background: var(--c-white);
+  box-shadow: inset 0 0 0 1px var(--c-black);
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.option:has(input:focus-visible) {
+  outline: 3px solid var(--c-black);
+  outline-offset: 2px;
+}
+
+.radio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 2px solid var(--c-black);
+}
+
+.option:has(input:checked) .radio::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--c-black);
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.optionText strong {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+}
+
+.optionText span {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.np {
+  font-family: var(--font-heading);
+  padding: 2px 6px;
+  background: #e5312d;
+  color: var(--c-white);
+  font-size: 11px;
+  font-weight: var(--fw-black);
+}
+
+/* ── Спосіб доставки: плитки (десктоп) / випадний список (мобільний) ── */
+.methods {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  gap: 16px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.method {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 14px 14px;
+  border: 2px solid var(--c-gray-300);
+  background: var(--c-paper);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.method input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.method:hover {
+  border-color: var(--c-black);
+}
+
+.method:has(input:checked) {
+  border-color: var(--c-black);
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.method:has(input:focus-visible) {
+  outline: 3px solid var(--c-black);
+  outline-offset: 2px;
+}
+
+.methodIcon {
+  margin-bottom: 8px;
+}
+
+.method:has(input:checked) .methodIcon {
+  color: var(--c-lime);
+}
+
+.method strong {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  line-height: 1.2;
+}
+
+.method > span {
+  font-size: var(--fs-caption);
+  color: var(--c-gray-700);
+}
+
+.method:has(input:checked) > span {
+  color: rgb(249 249 249 / 0.72);
+}
+
+.methodGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.methodGroupTitle {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-gray-700);
+}
+
+.groupMark {
+  width: 18px;
+  color: var(--c-black);
+}
+
+.methodRow {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Плитки НП — з червоною смужкою зверху, щоб читалися як одна група */
+.methodGroup:first-of-type .method {
+  border-top: 4px solid #e5312d;
+}
+
+.methodSelect {
+  display: none;
+}
+
+/* Панель з полями обраного способу */
+.deliveryPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--c-gray-50);
+}
+
+.chosen {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--c-lime);
+  background: var(--c-paper);
+}
+
+.chosen > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-small);
+}
+
+.chosen strong {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+}
+
+.chosen > span > span {
+  color: var(--c-gray-700);
+}
+
+.eta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.eta span {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  color: var(--c-gray-700);
+}
+
+.pickupTitle {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+.muted {
+  color: var(--c-gray-700);
+}
+
+.pickup {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: var(--c-sand);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.pickupMark {
+  flex: none;
+  width: 32px;
+  color: var(--c-orange);
+}
+
+/* ── Згода ── */
+.consentBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 2px solid var(--c-black);
+}
+
+.check {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.check input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.box {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 2px solid var(--c-black);
+  color: transparent;
+}
+
+.check input:checked + .box {
+  background: var(--c-black);
+  color: var(--c-lime);
+}
+
+.check input:focus-visible + .box {
+  outline: 3px solid var(--c-black);
+  outline-offset: 2px;
+}
+
+.check input[aria-invalid="true"] + .box {
+  border-color: var(--c-error);
+}
+
+.check a {
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.submitMobile {
+  display: none !important;
+  margin-top: 8px;
+}
+
+/* ── Підсумок ── */
+.summary {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 2px solid var(--c-black);
+  background: var(--c-paper);
+}
+
+.summaryHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.summaryHead h2 {
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+}
+
+.summaryHead a {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+
+.items li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: var(--fs-small);
+}
+
+.itemText strong {
+  font-family: var(--font-heading);
+  line-height: 1.3;
+}
+
+.itemText span {
+  color: var(--c-gray-700);
+}
+
+.itemPrice {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-black);
+  white-space: nowrap;
+}
+
+.secure {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-caption);
+  color: var(--c-gray-700);
+}
+
+.paying {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  background: rgb(249 249 249 / 0.92);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-black);
+  text-transform: uppercase;
+}
+
+.payingMark {
+  width: 72px;
+  animation: pulse 900ms var(--ease) infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  height: 480px;
+  background: linear-gradient(90deg, var(--c-gray-50), var(--c-gray-100), var(--c-gray-50));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  color: var(--c-gray-700);
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* На мобільному підсумок — над формою, кнопка — в кінці форми */
+  .summary {
+    position: static;
+    order: -1;
+  }
+
+  .submitDesktop {
+    display: none !important;
+  }
+
+  .submitMobile {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 641px) {
+  .methods {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid2,
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .methods {
+    display: none;
+  }
+
+  .methodSelect {
+    display: block;
+  }
+
+  .deliveryPanel {
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 18px var(--gutter);
+  }
+
+  .summary {
+    padding: 18px;
+  }
+}

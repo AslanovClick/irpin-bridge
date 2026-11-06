@@ -1,0 +1,111 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.links a {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--c-black);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.links a:hover {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.post {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--c-gray-100);
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(17 17 17 / 0.55);
+  color: var(--c-white);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.post:hover .overlay,
+.post:focus-visible .overlay {
+  opacity: 1;
+}
+
+.post:hover .img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+
+/* Мобільний: акаунти й пости — горизонтальні стрічки з відступом від краю */
+@media (max-width: 640px) {
+  .links,
+  .grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .links::-webkit-scrollbar,
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .links > li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  .links a {
+    white-space: nowrap;
+  }
+
+  .grid > li {
+    flex: 0 0 62%;
+    scroll-snap-align: start;
+  }
+}

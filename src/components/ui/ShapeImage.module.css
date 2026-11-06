@@ -1,0 +1,91 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 5);
+  overflow: hidden;
+  background: var(--surface, var(--c-gray-100));
+}
+
+/* Виріз ліворуч зверху + праворуч знизу — форма зі знака */
+.shape-a {
+  clip-path: polygon(
+    var(--nx) 0,
+    100% 0,
+    100% calc(100% - var(--ny)),
+    calc(100% - var(--nx)) calc(100% - var(--ny)),
+    calc(100% - var(--nx)) 100%,
+    0 100%,
+    0 var(--ny),
+    var(--nx) var(--ny)
+  );
+}
+
+/* Дзеркальна */
+.shape-b {
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--nx)) 0,
+    calc(100% - var(--nx)) var(--ny),
+    100% var(--ny),
+    100% 100%,
+    var(--nx) 100%,
+    var(--nx) calc(100% - var(--ny)),
+    0 calc(100% - var(--ny))
+  );
+}
+
+/* Один виріз — праворуч зверху (портрет не «з'їдається» з двох боків) */
+.shape-tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--nx)) 0,
+    calc(100% - var(--nx)) var(--ny),
+    100% var(--ny),
+    100% 100%,
+    0 100%
+  );
+}
+
+.shape-tl {
+  clip-path: polygon(
+    var(--nx) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--ny),
+    var(--nx) var(--ny)
+  );
+}
+
+/* Один виріз праворуч знизу — для портретів з обличчям угорі */
+.shape-br {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--ny)),
+    calc(100% - var(--nx)) calc(100% - var(--ny)),
+    calc(100% - var(--nx)) 100%,
+    0 100%
+  );
+}
+
+/* Один виріз ліворуч знизу */
+.shape-bl {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    var(--nx) 100%,
+    var(--nx) calc(100% - var(--ny)),
+    0 calc(100% - var(--ny))
+  );
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+
+.wrap:hover .img {
+  transform: scale(1.03);
+}

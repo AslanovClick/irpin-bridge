@@ -1,0 +1,509 @@
+/* ── Мініатюра ── */
+.thumb {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--c-gray-100);
+}
+
+.thumb img {
+  object-fit: cover;
+}
+
+.thumbMark {
+  width: 56%;
+}
+
+/* ── Рядок кошика ── */
+.line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.lineCompact {
+  gap: 14px;
+  padding-block: 14px;
+}
+
+.lineBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lineTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lineName {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+}
+
+.lineName:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lineMeta {
+  margin-top: 4px;
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.remove {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -6px -6px 0 0;
+  color: var(--c-gray-700);
+}
+
+.remove:hover {
+  color: var(--c-error);
+}
+
+.lineBottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.linePrice {
+  font-family: var(--font-heading);
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 1.125rem;
+  font-weight: var(--fw-black);
+  white-space: nowrap;
+}
+
+.linePrice span {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--c-gray-700);
+}
+
+/* ── Кількість ── */
+.qty {
+  display: inline-flex;
+  height: 40px;
+  border: 2px solid var(--c-black);
+}
+
+.qtyCompact {
+  height: 36px;
+}
+
+.qty button {
+  width: 36px;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: var(--fw-bold);
+}
+
+.qty button:hover:not(:disabled) {
+  background: var(--c-gray-100);
+}
+
+.qty button:disabled {
+  color: var(--c-gray-300);
+  cursor: default;
+}
+
+.qty output {
+  font-family: var(--font-heading);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-bold);
+}
+
+/* ── Промокод ── */
+.promoToggle,
+.textBtn {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.promo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promoRow {
+  display: flex;
+  border: 2px solid var(--c-black);
+  background: var(--c-paper);
+}
+
+.promoRow input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+}
+
+.promoRow input::placeholder {
+  text-transform: none;
+  font-weight: var(--fw-medium);
+  color: var(--c-gray-500);
+}
+
+.promoRow input:focus {
+  outline: none;
+}
+
+.promoRow button {
+  font-family: var(--font-heading);
+  padding: 0 14px;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.promoRow button:hover {
+  background: var(--c-pine);
+}
+
+.promoApplied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--c-lime);
+  font-size: var(--fs-small);
+}
+
+.promoApplied > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--c-error);
+}
+
+/* ── Підсумки ── */
+.totals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.9375rem;
+}
+
+.totals dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  text-align: right;
+}
+
+.discount dd {
+  color: var(--c-pine);
+}
+
+.muted {
+  font-family: var(--font-body) !important;
+  font-weight: var(--fw-regular) !important;
+  color: var(--c-gray-700);
+}
+
+.grand {
+  align-items: baseline;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 2px solid var(--c-black);
+}
+
+.grand dt {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+.grand dd {
+  font-size: 1.5rem;
+  font-weight: var(--fw-black);
+}
+
+.mission {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--c-sand);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.missionMark {
+  flex: none;
+  width: 20px;
+  margin-top: 1px;
+  color: var(--c-orange);
+}
+
+/* ── Міні-кошик ── */
+.drawer {
+  width: 100%;
+  max-width: 460px;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+.drawer::backdrop {
+  background: rgb(17 17 17 / 0.5);
+}
+
+.drawer[open] {
+  animation: drawerIn var(--dur) var(--ease);
+}
+
+@keyframes drawerIn {
+  from {
+    transform: translateX(48px);
+    opacity: 0;
+  }
+}
+
+.drawerInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.drawerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 2px solid var(--c-black);
+}
+
+.drawerHead h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+}
+
+.drawerHead h2 span {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  background: var(--c-lime);
+  font-size: var(--fs-caption);
+  letter-spacing: 0;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+}
+
+.drawerList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px;
+}
+
+.drawerFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 24px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--c-paper);
+}
+
+.drawerEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 40px 24px;
+}
+
+.drawerEmpty p:not(.emptyTitle) {
+  color: var(--c-gray-700);
+}
+
+.emptyMark {
+  width: 64px;
+  color: var(--c-lime);
+}
+
+.emptyTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-black);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-heading);
+}
+
+/* ── Сторінка кошика ── */
+.page {
+  padding-block: clamp(20px, 2.5vw, 32px) var(--section-y);
+}
+
+.title {
+  margin-block: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 36px);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+}
+
+.title span {
+  margin-left: 12px;
+  font-size: 0.45em;
+  color: var(--c-gray-700);
+  vertical-align: middle;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.list {
+  border-top: 2px solid var(--c-black);
+}
+
+.continue {
+  margin-top: 24px;
+}
+
+.summary {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: var(--c-paper);
+  border: 2px solid var(--c-black);
+}
+
+.summaryTitle {
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+}
+
+.pay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pay span {
+  font-family: var(--font-heading);
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--c-gray-700);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 32px 0 8px;
+  max-width: 560px;
+}
+
+.empty p {
+  color: var(--c-gray-700);
+}
+
+.skeleton {
+  height: 320px;
+  background: linear-gradient(90deg, var(--c-gray-50), var(--c-gray-100), var(--c-gray-50));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .summary {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawerHead,
+  .drawerList,
+  .drawerFoot,
+  .drawerEmpty {
+    padding-inline: var(--gutter);
+  }
+
+  .summary {
+    padding: 18px;
+  }
+}

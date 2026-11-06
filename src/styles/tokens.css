@@ -1,0 +1,221 @@
+/*
+ * IRPIN BRIDGE — дизайн-токени
+ * Джерело: бренд-бук «Irpin Bridge — розробка айдентики» (2026), адаптовано під веб.
+ */
+
+:root {
+  /* ── Палітра бренду: 4 контрастні пари + нейтральні ── */
+  --c-pine: #015641;
+  --c-lime: #d5f266;
+  --c-blue: #005ec4;
+  --c-sky: #4fc6e6;
+  --c-sand: #eadfbb;
+  --c-orange: #f77e2d;
+  --c-purple: #6c2c91;
+  --c-pink: #ef65ab;
+  --c-black: #111111;
+  --c-white: #f9f9f9;
+
+  /* ── Веб-нейтральні (похідні, для інтерфейсу) ── */
+  --c-paper: #ffffff;
+  --c-gray-50: #f2f2ef;
+  --c-gray-100: #e9e9e5;
+  --c-gray-300: #cfcfca;
+  --c-gray-500: #8a8a86;
+  --c-gray-700: #5b5b58; /* вторинний текст на білому, контраст 6.6:1 */
+
+  /* ── Системні ── */
+  --c-error: #c4321f;
+  --c-success: #015641;
+
+  /* ── Типографіка ── */
+  /* Заголовки, кнопки, цифри, мітки — Inter Tight; основний текст — Mulish */
+  --font-heading: var(--font-inter-tight), "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-mulish), "Mulish", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-body);
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* Розміри: плавні між 360px і 1440px */
+  /* Ієрархія: один display на сторінку (hero), далі всі секції — h2 */
+  --fs-display: clamp(3rem, 1.6rem + 6.2vw, 7.5rem);    /* 48 → 120 */
+  --fs-h1: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);      /* 40 → 76 */
+  --fs-h2: clamp(2rem, 1.45rem + 2.4vw, 3.5rem);        /* 32 → 56 */
+  --fs-h3: clamp(1.25rem, 1.08rem + 0.75vw, 1.75rem);   /* 20 → 28 */
+  --fs-h4: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);     /* 17 → 20 */
+  --fs-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem); /* 17 → 21 */
+  --fs-body: 1rem;                                      /* 16 */
+  --fs-small: 0.875rem;                                 /* 14 */
+  --fs-caption: 0.75rem;                                /* 12 */
+
+  /* Великі заголовки капсом: 1.22 — мінімум, за якого хвіст Д/Щ не торкається бреве Й та крапок Ї рядком нижче */
+  --lh-tight: 1.22;
+  --lh-heading: 1.08;
+  --lh-snug: 1.3;
+  --lh-body: 1.6;
+
+  /* Трекінг: чим менший кегль, тим ближче до нуля — інакше Black «злипається» */
+  /* Трекінг заголовків — 4%: Black-накреслення не «злипається» */
+  --ls-display: 0.04em;
+  --ls-h2: 0.04em;
+  --ls-heading: 0.04em;
+  --ls-caps: 0.06em;
+
+  /* ── Сітка і відступи ── */
+  --container: 1440px;
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --gap: clamp(12px, 1.6vw, 24px);
+  --section-y: clamp(64px, 8vw, 120px);
+  --head-gap: clamp(32px, 3.6vw, 56px);  /* від шапки секції до контенту */
+  --split-gap: clamp(40px, 6vw, 104px);  /* між колонками текст/медіа */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Бренд геометричний — без заокруглень */
+  --radius: 0;
+
+  --header-h: 84px;
+  --tap: 48px; /* мінімальна зона натиску */
+
+  /* ── Рух ── */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+}
+
+/*
+ * Колірні теми секцій. Кожна пара з бренд-буку — окрема тема.
+ * --fg      основний текст (контраст ≥ 4.5:1 до --bg)
+ * --accent  великі заголовки й графіка (може мати нижчий контраст)
+ * --surface другий колір пари для плашок і фігур
+ */
+.theme-light {
+  --bg: var(--c-white);
+  --fg: var(--c-black);
+  --fg-muted: var(--c-gray-700);
+  --accent: var(--c-black);
+  --mark: var(--c-black);
+  --surface: var(--c-gray-100);
+  --line: rgb(17 17 17 / 0.14);
+  --btn-bg: var(--c-black);
+  --btn-fg: var(--c-white);
+  --btn-hover-bg: var(--c-lime);
+  --btn-hover-fg: var(--c-black);
+}
+
+.theme-dark {
+  --bg: var(--c-black);
+  --fg: var(--c-white);
+  --fg-muted: rgb(249 249 249 / 0.68);
+  --accent: var(--c-lime);
+  --mark: var(--c-lime);
+  --surface: #1c1c1c;
+  --line: rgb(249 249 249 / 0.16);
+  --btn-bg: var(--c-lime);
+  --btn-fg: var(--c-black);
+  --btn-hover-bg: var(--c-white);
+  --btn-hover-fg: var(--c-black);
+}
+
+/* Послуги / кастомізація */
+.theme-pine {
+  --bg: var(--c-pine);
+  --fg: var(--c-lime);
+  --fg-muted: rgb(213 242 102 / 0.92);
+  --accent: var(--c-lime);
+  --mark: var(--c-lime);
+  --surface: #0c6a52;
+  --line: rgb(213 242 102 / 0.24);
+  --btn-bg: var(--c-lime);
+  --btn-fg: var(--c-pine);
+  --btn-hover-bg: var(--c-white);
+  --btn-hover-fg: var(--c-pine);
+}
+
+.theme-lime {
+  --bg: var(--c-lime);
+  --fg: var(--c-black);
+  --fg-muted: rgb(17 17 17 / 0.72);
+  --accent: var(--c-pine);
+  --mark: var(--c-black);
+  --surface: #c6e64f;
+  --line: rgb(17 17 17 / 0.18);
+  --btn-bg: var(--c-black);
+  --btn-fg: var(--c-lime);
+  --btn-hover-bg: var(--c-pine);
+  --btn-hover-fg: var(--c-lime);
+}
+
+/* Бізнес-мерч */
+.theme-blue {
+  --bg: var(--c-blue);
+  --fg: var(--c-white);
+  --fg-muted: rgb(249 249 249 / 0.9);
+  --accent: var(--c-sky);
+  --mark: var(--c-sky);
+  --surface: #0a6fd8;
+  --line: rgb(249 249 249 / 0.24);
+  --btn-bg: var(--c-sky);
+  --btn-fg: var(--c-black);
+  --btn-hover-bg: var(--c-white);
+  --btn-hover-fg: var(--c-black);
+}
+
+/* Арт-мерч */
+.theme-purple {
+  --bg: var(--c-purple);
+  --fg: var(--c-white);
+  --fg-muted: rgb(249 249 249 / 0.78);
+  --accent: var(--c-pink);
+  --mark: var(--c-pink);
+  --surface: #7a3a9f;
+  --line: rgb(249 249 249 / 0.22);
+  --btn-bg: var(--c-pink);
+  --btn-fg: var(--c-black);
+  --btn-hover-bg: var(--c-white);
+  --btn-hover-fg: var(--c-black);
+}
+
+/* Соціальна місія */
+.theme-sand {
+  --bg: var(--c-sand);
+  --fg: var(--c-black);
+  --fg-muted: rgb(17 17 17 / 0.72);
+  --accent: var(--c-orange);
+  --mark: var(--c-orange);
+  --surface: #e2d4a6;
+  --line: rgb(17 17 17 / 0.16);
+  --btn-bg: var(--c-black);
+  --btn-fg: var(--c-sand);
+  --btn-hover-bg: var(--c-orange);
+  --btn-hover-fg: var(--c-black);
+}
+
+.theme-orange {
+  --bg: var(--c-orange);
+  --fg: var(--c-black);
+  --fg-muted: rgb(17 17 17 / 0.75);
+  --accent: var(--c-sand);
+  --mark: var(--c-black);
+  --surface: #f98f48;
+  --line: rgb(17 17 17 / 0.18);
+  --btn-bg: var(--c-black);
+  --btn-fg: var(--c-sand);
+  --btn-hover-bg: var(--c-sand);
+  --btn-hover-fg: var(--c-black);
+}
+
+[class*="theme-"] {
+  background-color: var(--bg);
+  color: var(--fg);
+}

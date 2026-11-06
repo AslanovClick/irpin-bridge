@@ -1,0 +1,267 @@
+.head {
+  padding-block: clamp(20px, 2.5vw, 32px) clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+}
+
+.updated {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+  padding-block: clamp(32px, 4vw, 56px) clamp(64px, 8vw, 120px);
+}
+
+/* ── Зміст ── */
+.toc {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+
+.toc summary {
+  font-family: var(--font-heading);
+  margin-bottom: 12px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  list-style: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc ol {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--line);
+}
+
+.toc a {
+  display: block;
+  margin-left: -2px;
+  padding: 8px 0 8px 16px;
+  border-left: 2px solid transparent;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--c-gray-700);
+}
+
+.toc a:hover {
+  border-color: var(--c-black);
+  color: var(--c-black);
+}
+
+/* ── Текст ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3vw, 40px);
+  max-width: 760px;
+}
+
+.intro {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.45;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+.section h2 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+}
+
+.section p {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--c-gray-700);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--c-black);
+}
+
+.rows {
+  margin: 0;
+  border-top: 2px solid var(--c-black);
+}
+
+.rows > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rows dt {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+.rows dd {
+  margin: 0;
+  color: var(--c-gray-700);
+  overflow-wrap: anywhere;
+}
+
+.cookieCta button {
+  font-family: var(--font-heading);
+  min-height: 48px;
+  padding: 0 20px;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-weight: var(--fw-bold);
+}
+
+.cookieCta button:hover {
+  background: var(--c-lime);
+  color: var(--c-black);
+}
+
+/* ── Інші документи ── */
+.others {
+  margin-top: clamp(16px, 3vw, 32px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.othersTitle {
+  font-family: var(--font-heading);
+  margin-bottom: 12px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.others ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.others a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 100%;
+  padding: 16px 18px;
+  background: var(--surface);
+}
+
+.others a > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.others strong {
+  font-family: var(--font-heading);
+}
+
+.others a > span > span {
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.others a:hover {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.others a:hover > span > span {
+  color: rgb(249 249 249 / 0.7);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toc {
+    position: static;
+    padding: 4px 16px;
+    background: var(--surface);
+  }
+
+  .toc summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    margin: 0;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .toc summary::after {
+    content: "+";
+    font-size: 1.25rem;
+  }
+
+  .toc details[open] summary::after {
+    content: "−";
+  }
+
+  .toc ol {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rows > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .others ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

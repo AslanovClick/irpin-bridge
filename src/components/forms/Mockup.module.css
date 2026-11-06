@@ -1,0 +1,212 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Вкладки «Спереду / Ззаду» */
+.tabs {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 4px;
+  padding: 4px;
+  background: var(--c-gray-100);
+}
+
+.tab {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--c-gray-700);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.tab:hover {
+  color: var(--c-black);
+}
+
+.tab[aria-selected="true"] {
+  background: var(--c-paper);
+  color: var(--c-black);
+  box-shadow: 0 1px 2px rgb(17 17 17 / 0.12);
+}
+
+.tab:focus-visible {
+  outline: 3px solid var(--c-black);
+  outline-offset: -3px;
+}
+
+.tabCount {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: var(--c-lime);
+  color: var(--c-black);
+  font-size: var(--fs-caption);
+  line-height: 1;
+}
+
+/* Сцена */
+.stage {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+  background:
+    radial-gradient(circle at 50% 38%, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0) 62%),
+    var(--c-gray-100);
+}
+
+.canvas {
+  position: absolute;
+  inset: 4%;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.body {
+  filter: drop-shadow(0 6px 10px rgb(17 17 17 / 0.14));
+}
+
+.ground {
+  fill: rgb(17 17 17 / 0.08);
+}
+
+/* Зона нанесення — координати у % від поля svg (із відступами сцени) */
+.zone {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 2px dashed rgb(249 249 249 / 0.88);
+  background: rgb(249 249 249 / 0.08);
+  color: var(--c-white);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.zone[data-light] {
+  border-color: rgb(17 17 17 / 0.4);
+  background: rgb(17 17 17 / 0.03);
+  color: var(--c-black);
+}
+
+.zone:hover {
+  border-style: solid;
+  border-color: var(--c-lime);
+  background: rgb(213 242 102 / 0.25);
+}
+
+.zone[data-on] {
+  border: 2px solid var(--c-lime);
+  background: transparent;
+}
+
+.zone:focus-visible {
+  outline: 3px solid var(--c-lime);
+  outline-offset: 2px;
+}
+
+.zone img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.plus {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.design {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--c-lime);
+  color: var(--c-black);
+}
+
+.design svg {
+  width: 60%;
+  max-width: 64px;
+}
+
+/* Чипи місць нанесення */
+.chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chipsLabel {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.chips ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px 0 8px;
+  border: 2px solid var(--c-gray-300);
+  background: var(--c-paper);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--c-gray-500);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--c-black);
+}
+
+.chipBox {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--c-gray-300);
+}
+
+.chip[aria-pressed="true"] .chipBox {
+  border-color: var(--c-black);
+  background: var(--c-lime);
+}
+
+.chipView {
+  font-weight: var(--fw-medium);
+  color: var(--c-gray-500);
+}

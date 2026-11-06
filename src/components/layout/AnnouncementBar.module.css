@@ -1,0 +1,40 @@
+.bar {
+  font-family: var(--font-heading);
+  background: var(--c-black);
+  color: var(--c-lime);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 38px;
+  text-align: center;
+}
+
+.link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--c-white);
+}
+
+.link:hover {
+  color: var(--c-lime);
+}
+
+.short {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .full {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}

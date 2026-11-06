@@ -1,0 +1,107 @@
+.wrap {
+  padding-block: clamp(20px, 2.5vw, 32px) var(--section-y);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 48px;
+  margin-top: clamp(24px, 3vw, 40px);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+}
+
+.intro {
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--c-gray-700);
+}
+
+/* Категорії — горизонтальна стрічка, на мобільному гортається */
+.cats {
+  margin-block: clamp(24px, 3vw, 36px) clamp(28px, 3.4vw, 44px);
+}
+
+.cats ul {
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cats ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cat {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--c-black);
+  font-weight: var(--fw-bold);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.cat span {
+  font-size: var(--fs-caption);
+  color: var(--c-gray-700);
+}
+
+.cat:hover {
+  background: var(--c-gray-100);
+}
+
+.cat[aria-current="page"] {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.cat[aria-current="page"] span {
+  color: var(--c-lime);
+}
+
+.seo {
+  max-width: 820px;
+  margin-top: var(--section-y);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.seo h2 {
+  margin-bottom: 12px;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-heading);
+}
+
+.seo p {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--c-gray-700);
+}
+
+@media (max-width: 640px) {
+  .cats {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  .cats ul {
+    padding-inline: var(--gutter);
+  }
+}

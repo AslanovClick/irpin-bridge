@@ -1,0 +1,120 @@
+.dialog {
+  width: min(600px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  border: 2px solid var(--c-black);
+  background: var(--c-white);
+  color: var(--c-black);
+  box-shadow: 10px 10px 0 0 var(--c-lime);
+}
+
+.dialog::backdrop {
+  background: rgb(17 17 17 / 0.55);
+}
+
+.dialog[open] {
+  animation: in var(--dur) var(--ease);
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.inner {
+  position: relative;
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 40px;
+}
+
+.head h2 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+}
+
+.head p {
+  color: var(--c-gray-700);
+}
+
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding-block: 8px;
+}
+
+.done h2 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+}
+
+.done p:not(.doneNum) {
+  color: var(--c-gray-700);
+}
+
+.doneIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: var(--c-lime);
+}
+
+.doneNum {
+  font-family: var(--font-heading);
+  padding: 4px 10px;
+  border: 2px solid var(--c-black);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+@media (max-width: 560px) {
+  .dialog {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-width: 2px 0 0;
+    box-shadow: none;
+  }
+}
+
+/* Вбудована версія */
+.inline {
+  padding: clamp(20px, 3vw, 36px);
+  border: 2px solid var(--c-black);
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+.inline .head {
+  padding-right: 0;
+}

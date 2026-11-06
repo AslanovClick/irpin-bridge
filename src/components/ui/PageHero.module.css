@@ -1,0 +1,125 @@
+.hero {
+  padding-block: clamp(20px, 2.5vw, 32px) clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+
+/* Хлібні крихти на кольоровому фоні */
+.hero nav li,
+.hero nav [aria-current] {
+  color: var(--fg);
+}
+
+.hero nav li {
+  opacity: 0.85;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--split-gap);
+  align-items: center;
+  margin-top: clamp(24px, 3vw, 40px);
+}
+
+.withImage {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.title {
+  max-width: 16ch;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 52ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: 640px;
+  margin: 8px 0 0;
+  border-top: 2px solid currentColor;
+}
+
+.facts > div {
+  padding: 14px 14px 0 0;
+}
+
+.facts > div + div {
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+}
+
+.facts dt {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  letter-spacing: var(--ls-heading);
+}
+
+.facts dd {
+  margin: 2px 0 0;
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.media {
+  position: relative;
+  padding: 0 0 9% 9%;
+}
+
+.block {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 72%;
+  height: 58%;
+  background: var(--surface);
+}
+
+.media > div {
+  position: relative;
+  width: 91%;
+}
+
+@media (max-width: 900px) {
+  .withImage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .media {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 560px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .facts > div,
+  .facts > div + div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}

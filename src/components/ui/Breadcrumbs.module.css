@@ -1,0 +1,43 @@
+.nav {
+  font-size: var(--fs-small);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+.list li + li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin: 0 10px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.list a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+
+.list a:hover {
+  color: var(--fg, var(--c-black));
+  text-decoration-color: currentColor;
+}
+
+.list [aria-current] {
+  color: var(--fg, var(--c-black));
+  font-weight: var(--fw-bold);
+}

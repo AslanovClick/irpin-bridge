@@ -1,0 +1,564 @@
+/* ── Напрями студії: 4 картки в кольорах розділів ── */
+.directions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.direction {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  padding: 20px 20px 22px;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.dirTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dirNum {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--fg-muted);
+}
+
+.dirFact {
+  font-family: var(--font-heading);
+  padding: 4px 10px;
+  background: var(--accent);
+  color: var(--c-black);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-black);
+}
+
+.dirBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dirBody strong {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+}
+
+.dirBody > span {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.dirMore {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  font-weight: var(--fw-bold);
+}
+
+.dirMore svg {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.direction:hover .dirMore svg {
+  transform: translateX(6px);
+}
+
+/* ── Виробництво ── */
+.prod {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--split-gap);
+  align-items: start;
+}
+
+.prodStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 0;
+}
+
+.prodStats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 24px;
+  background: var(--surface);
+}
+
+.prodStats dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  letter-spacing: var(--ls-heading);
+  color: var(--accent);
+}
+
+.prodStats dt {
+  color: var(--fg-muted);
+}
+
+/* ── Команда ── */
+.team {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 32px var(--gap);
+}
+
+.team li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.team strong {
+  font-family: var(--font-heading);
+  margin-top: 10px;
+  line-height: 1.25;
+}
+
+.team li > span:last-child {
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+.avatar {
+  font-family: var(--font-heading);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: var(--c-sand);
+  color: var(--c-orange);
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-heading);
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 74% 74%, 74% 100%, 0 100%);
+}
+
+.avatar[data-tone="1"] {
+  background: var(--c-orange);
+  color: var(--c-sand);
+}
+
+.avatar[data-tone="2"] {
+  background: var(--c-black);
+  color: var(--c-sand);
+}
+
+/* ── Схема соціального підприємства ── */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  counter-reset: flow;
+}
+
+.flow li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px 24px;
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+/* Стрілка між кроками */
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(var(--gap) * -1);
+  z-index: 1;
+  width: var(--gap);
+  height: 2px;
+  background: var(--c-orange);
+}
+
+.flowNum {
+  font-family: var(--font-heading);
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 3.5rem;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--c-sand);
+}
+
+.flowIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  background: var(--c-orange);
+  color: var(--c-black);
+}
+
+.flow h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.flow p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+/* ── Вплив ── */
+.impactHead {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--split-gap);
+  align-items: end;
+  margin-bottom: var(--head-gap);
+}
+
+.impact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-top: 2px solid var(--c-black);
+}
+
+.impact > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 16px 16px 0 0;
+}
+
+.impact > div + div {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.impact dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--c-black);
+  /* Помаранчевий — як підкреслення: сам по собі на білому не тримає контраст 3:1 */
+  text-decoration: underline;
+  text-decoration-color: var(--c-orange);
+  text-decoration-thickness: 6px;
+  text-underline-offset: 6px;
+}
+
+.impact dt {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.stories {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px var(--gap);
+}
+
+.stories li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.storyMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.storyMedia img {
+  object-fit: cover;
+}
+
+.stories h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.stories p {
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+/* ── Партнери ── */
+.partners {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.partners li {
+  font-family: var(--font-heading);
+  display: grid;
+  place-items: center;
+  min-height: 112px;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  text-align: center;
+  color: var(--c-gray-700);
+}
+
+/* ── Простір ── */
+.space {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: repeat(2, clamp(180px, 18vw, 280px));
+  gap: var(--gap);
+}
+
+.space li {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.space li:first-child {
+  grid-row: span 2;
+}
+
+.space li:nth-child(2) {
+  grid-column: span 2;
+}
+
+.space img {
+  object-fit: cover;
+}
+
+/* ── CTA: три шляхи співпраці + плашка фонду ── */
+.ways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.ways li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(22px, 2.6vw, 32px);
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+.wayTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.wayIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: var(--c-black);
+  color: var(--c-orange);
+}
+
+.wayNum {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--c-sand);
+}
+
+.ways h3 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+}
+
+.ways p {
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+.ways li > a {
+  margin-top: auto;
+}
+
+.ways p.wayMeta {
+  font-family: var(--font-heading);
+  padding: 10px 12px;
+  background: var(--c-sand);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  line-height: 1.45;
+  color: var(--c-black);
+}
+
+.fund {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: var(--gap);
+  padding: 20px 24px;
+  border: 2px solid var(--c-black);
+}
+
+.fund > p:first-of-type {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-small);
+}
+
+.fund strong {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+}
+
+.fundText {
+  flex: 1;
+  min-width: 220px;
+  color: var(--fg-muted);
+}
+
+.fundMark {
+  flex: none;
+  width: 48px;
+  color: var(--c-black);
+}
+
+@media (max-width: 1100px) {
+  .directions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .team {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .partners {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .impactHead {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .prod {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ways {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow,
+  .stories {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow li:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: calc(var(--gap) * -1);
+    left: 52px;
+    width: 2px;
+    height: var(--gap);
+  }
+
+  .space {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: clamp(160px, 40vw, 260px);
+  }
+
+  .space li:first-child {
+    grid-row: auto;
+    grid-column: span 2;
+  }
+
+  .space li:nth-child(2) {
+    grid-column: auto;
+  }
+
+  .space li:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Напрями — горизонтальний слайдер, щоб не було чотирьох високих карток поспіль */
+  .directions {
+    display: flex;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .directions > li {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+
+  .team {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prodStats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .impact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .impact > div,
+  .impact > div + div {
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 12px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .impact dd {
+    min-width: 3.2ch;
+  }
+}

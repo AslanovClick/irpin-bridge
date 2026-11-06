@@ -1,0 +1,274 @@
+/* ── FAQ ── */
+.faq {
+  border-top: 2px solid var(--fg, var(--c-black));
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-heading);
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid currentColor;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform var(--dur) var(--ease);
+}
+
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq p {
+  max-width: 70ch;
+  padding-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+/* ── Процес ── */
+.process {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+  gap: var(--gap);
+  counter-reset: step;
+}
+
+.process li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 18px;
+  border-top: 2px solid var(--fg, var(--c-black));
+}
+
+.num {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-black);
+  color: var(--accent, var(--c-black));
+}
+
+.process h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+}
+
+.process p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+/* ── Таймлайн ── */
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+/* Лінія через усі вузли */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 28px;
+  right: 28px;
+  height: 2px;
+  background: var(--accent, var(--c-black));
+  opacity: 0.5;
+}
+
+.timeline li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.node {
+  font-family: var(--font-heading);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  background: var(--accent, var(--c-black));
+  color: var(--bg, var(--c-white));
+  font-size: 1.125rem;
+  font-weight: var(--fw-black);
+  box-shadow: 0 0 0 6px var(--bg, var(--c-white));
+}
+
+.timeline li:last-child .node {
+  background: var(--c-lime);
+  color: var(--c-black);
+}
+
+.time {
+  font-family: var(--font-heading);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+}
+
+.timeline h3 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+}
+
+.timeline p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted, var(--c-gray-700));
+}
+
+/* ── Роботи ── */
+.works {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.works figure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--c-gray-100);
+}
+
+.workMedia img {
+  object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+
+.works figure:hover img {
+  transform: scale(1.04);
+}
+
+.works figcaption {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-small);
+}
+
+/* ── Маркований список ── */
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bullets li {
+  display: flex;
+  gap: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.bullets li::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  background: var(--accent, var(--c-black));
+}
+
+@media (max-width: 1000px) {
+  /* Таймлайн — вертикально, лінія ліворуч */
+  .timeline {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .timeline::before {
+    top: 28px;
+    bottom: 28px;
+    left: 27px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .timeline li {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 20px;
+    row-gap: 6px;
+    padding-bottom: 28px;
+  }
+
+  .node {
+    grid-row: span 3;
+    margin-bottom: 0;
+  }
+
+  .time {
+    justify-self: start;
+  }
+
+  .process {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .process {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .works {
+    display: flex;
+    gap: 12px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .works li {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+  }
+}

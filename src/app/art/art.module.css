@@ -1,0 +1,343 @@
+/* Спільні стилі сторінок арт-мерчу */
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px var(--gap);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px var(--gap);
+}
+
+/* ── Актуальна колекція ── */
+.feature {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--split-gap);
+  align-items: center;
+}
+
+.featureMedia {
+  position: relative;
+  max-width: 520px;
+}
+
+.featureText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.kicker {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.featureTitle {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+  text-box: trim-start cap alphabetic;
+}
+
+.by {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--c-purple);
+  color: var(--c-white);
+}
+
+.by span {
+  font-size: var(--fs-small);
+  color: rgb(249 249 249 / 0.88);
+}
+
+.by:hover {
+  background: var(--c-black);
+}
+
+.featureLead {
+  max-width: 48ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: 560px;
+  margin: 0;
+  border-top: 2px solid var(--c-black);
+}
+
+.facts > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 14px 14px 0 0;
+}
+
+.facts > div + div {
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+}
+
+.facts dd {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-black);
+  line-height: 1.1;
+  color: var(--c-purple);
+}
+
+.facts dt {
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+.featureProducts {
+  margin-top: var(--head-gap);
+  padding-top: var(--head-gap);
+  border-top: 1px solid var(--line);
+}
+
+/* ── Умови для митців ── */
+.perks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--head-gap);
+}
+
+.perks li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px;
+  background: var(--c-purple);
+  color: var(--c-white);
+}
+
+.perks li > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perks strong {
+  font-family: var(--font-heading);
+}
+
+.perks li > span:last-child > span {
+  font-size: var(--fs-small);
+  color: rgb(249 249 249 / 0.9);
+}
+
+.perkValue {
+  font-family: var(--font-heading);
+  flex: none;
+  min-width: 2.6em;
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--c-white);
+}
+
+/* ── Список з галочками ── */
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+.checks li::before {
+  content: "";
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  background: var(--accent)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='3'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+    center / 14px no-repeat;
+}
+
+/* ── Сторінка колекції / автора ── */
+.concept {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.thesis {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  letter-spacing: var(--ls-heading);
+}
+
+.body {
+  max-width: 60ch;
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-gray-700);
+}
+
+.body + .body {
+  margin-top: -12px;
+}
+
+.soon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 40px;
+  padding: clamp(22px, 3vw, 36px);
+  background: var(--c-lime);
+  color: var(--c-black);
+}
+
+.soon p {
+  max-width: 56ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
+
+.soon strong {
+  font-family: var(--font-heading);
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+}
+
+/* Міні-блок автора на сторінці колекції */
+.author {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.authorText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.authorText h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+}
+
+.authorText p {
+  max-width: 56ch;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--c-gray-700);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 1100px) {
+  .grid4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .perks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .featureMedia {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid4,
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  /* Колекції на мобільному — горизонтальний слайдер */
+  .slider {
+    display: flex;
+    gap: 12px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .slider > li {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+
+  .author {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .author > :first-child {
+    max-width: 220px;
+  }
+
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .facts > div,
+  .facts > div + div {
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 10px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}

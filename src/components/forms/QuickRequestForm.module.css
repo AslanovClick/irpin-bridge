@@ -1,0 +1,60 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(20px, 3vw, 36px);
+  border: 2px solid var(--c-black);
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+/* Що потрібно — сегментований перемикач рівної ширини */
+.intents > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  background: var(--c-gray-100);
+}
+
+.intents button {
+  justify-content: center;
+  min-height: 48px;
+  padding: 6px 8px;
+  border: 0;
+  background: transparent;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--c-gray-700);
+}
+
+.intents button:hover {
+  background: var(--c-paper);
+  color: var(--c-black);
+}
+
+.intents button[aria-pressed="true"] {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+@media (max-width: 560px) {
+  .intents button {
+    min-height: 52px;
+    font-size: 0.8125rem;
+  }
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+@media (max-width: 560px) {
+  .foot > a,
+  .foot > button {
+    width: 100%;
+  }
+}

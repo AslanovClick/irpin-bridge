@@ -1,0 +1,90 @@
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5) var(--space-7);
+  margin-bottom: var(--head-gap);
+}
+
+.flush {
+  margin-bottom: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 760px;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.mark {
+  flex: none;
+  width: 20px;
+  color: var(--mark, var(--fg));
+}
+
+.title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+  text-transform: uppercase;
+  color: var(--fg);
+  /* Верх великих літер — рівно по верхній лінії колонки (поруч із фото/формою) */
+  text-box: trim-start cap alphabetic;
+}
+
+.lead {
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+.action {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* Заголовок ліворуч, підзаголовок праворуч на тій самій верхній лінії */
+.split .text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4) var(--split-gap);
+  align-items: start;
+  width: 100%;
+  max-width: none;
+}
+
+.split .lead {
+  max-width: 52ch;
+  padding-top: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .split .text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .split .lead {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .action {
+    flex: 1 1 100%;
+  }
+}

@@ -1,0 +1,110 @@
+/* Тональний блок того ж кольору, що й секція (прийом зі слайдів бренд-буку) */
+.media {
+  position: relative;
+  padding: 0 9% 9% 0;
+}
+
+.block {
+  position: absolute;
+  left: 9%;
+  top: 9%;
+  right: 0;
+  bottom: 0;
+  background: var(--surface);
+}
+
+.media > div {
+  position: relative;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+/* Крок — тональна картка; смуга зверху показує прогрес 1/4 → 4/4 */
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 22px 22px;
+  background: var(--surface);
+}
+
+.progress {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: rgb(213 242 102 / 0.22);
+}
+
+.progress::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--step) * 25%);
+  background: var(--c-lime);
+}
+
+.num {
+  font-family: var(--font-heading);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 8px;
+  background: var(--c-lime);
+  color: var(--c-pine);
+  font-size: 1.125rem;
+  font-weight: var(--fw-black);
+}
+
+.stepTitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: var(--ls-heading);
+  color: var(--c-white);
+}
+
+.stepText {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 900px) {
+  .media {
+    max-width: 520px;
+    order: 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 8px;
+    padding: 20px 18px 18px;
+  }
+
+  .num {
+    margin-bottom: 0;
+  }
+
+  .stepText {
+    grid-column: 1 / -1;
+  }
+}

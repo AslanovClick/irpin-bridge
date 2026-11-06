@@ -1,0 +1,57 @@
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+.benefit {
+  padding-block: 18px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.benefit dt {
+  font-family: var(--font-heading);
+  margin-bottom: 6px;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-black);
+  line-height: 1.15;
+}
+
+.benefit dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--fg-muted);
+}
+
+/* Тональний блок того ж кольору — без «розкиданих» плям */
+.media {
+  position: relative;
+  padding: 0 0 9% 9%;
+}
+
+.block {
+  position: absolute;
+  left: 0;
+  top: 9%;
+  right: 9%;
+  bottom: 0;
+  background: var(--surface);
+}
+
+.media > div {
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .media {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 560px) {
+  .benefits {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,189 @@
+.hero {
+  padding-block: clamp(32px, 4.5vw, 64px) clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    "text visual"
+    "facts visual";
+  grid-template-rows: 1fr auto;
+  column-gap: var(--split-gap);
+  row-gap: 40px;
+}
+
+.text {
+  grid-area: text;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-small);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+}
+
+.mark {
+  width: 20px;
+}
+
+.title {
+  font-size: var(--fs-display);
+  line-height: 0.88;
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+  text-wrap: nowrap;
+}
+
+.lead {
+  max-width: 36ch;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--c-gray-700);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Факти — рівний ряд під текстом */
+.facts {
+  grid-area: facts;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px solid var(--c-black);
+}
+
+.fact {
+  padding: 16px 16px 0 0;
+}
+
+.fact + .fact {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.fact dt {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-black);
+  line-height: 1.15;
+}
+
+.fact dd {
+  margin: 2px 0 0;
+  font-size: var(--fs-small);
+  color: var(--c-gray-700);
+}
+
+/* ── Композиція: фото у формі знака + один тональний блок, як у бренд-буці ── */
+.visual {
+  grid-area: visual;
+  position: relative;
+  padding: 0 0 9% 9%;
+  align-self: center;
+}
+
+.block {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 72%;
+  height: 58%;
+  background: var(--c-lime);
+}
+
+.photo {
+  position: relative;
+  width: 91%;
+}
+
+.pin {
+  position: absolute;
+  left: 0;
+  bottom: 18%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  background: var(--c-paper);
+  color: var(--c-black);
+  border: 2px solid var(--c-black);
+  box-shadow: 6px 6px 0 0 var(--c-black);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.pin:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--c-black);
+}
+
+.pinName {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+}
+
+.pinPrice {
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: var(--fw-black);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "text"
+      "visual"
+      "facts";
+    grid-template-rows: auto;
+  }
+
+  .visual {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .title {
+    text-wrap: balance;
+  }
+}
+
+@media (max-width: 520px) {
+  .ctas > * {
+    flex: 1 1 100%;
+  }
+
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact,
+  .fact + .fact {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 12px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}

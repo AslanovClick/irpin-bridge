@@ -1,0 +1,163 @@
+/* ── Як це працює: вертикальний таймлайн ── */
+.flow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+.flowItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 18px;
+  padding-bottom: 22px;
+}
+
+/* Лінія між кроками */
+.flowItem:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: var(--c-black);
+  opacity: 0.18;
+}
+
+.flowNum {
+  font-family: var(--font-heading);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--c-orange);
+  font-size: 1.125rem;
+  font-weight: var(--fw-black);
+}
+
+.flowItem:last-child .flowNum {
+  background: var(--c-black);
+  color: var(--c-sand);
+}
+
+.flowTitle {
+  margin-top: 8px;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: var(--ls-heading);
+}
+
+.flowText {
+  margin-top: 4px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+}
+
+/* ── Фото у формі знака ── */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.mosaic {
+  position: relative;
+  aspect-ratio: 1 / 0.92;
+}
+
+.photoA,
+.photoB {
+  position: absolute;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.photoA img,
+.photoB img {
+  object-fit: cover;
+}
+
+/* Великий прямокутник знизу ліворуч */
+.photoA {
+  left: 0;
+  bottom: 0;
+  width: 64%;
+  height: 70%;
+}
+
+/* Менший прямокутник зверху праворуч */
+.photoB {
+  right: 0;
+  top: 0;
+  width: 54%;
+  height: 58%;
+}
+
+/* «Вікно» на перетині — як у логотипі */
+.window {
+  position: absolute;
+  left: 46%;
+  top: 30%;
+  width: 18%;
+  height: 28%;
+  background: var(--c-orange);
+}
+
+/* ── Цифри ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px solid var(--c-black);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 16px 16px 0 0;
+}
+
+.stat + .stat {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.stat dd {
+  font-family: var(--font-heading);
+  margin: 0;
+  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  letter-spacing: var(--ls-h2);
+  white-space: nowrap;
+}
+
+.stat dt {
+  font-size: var(--fs-small);
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 520px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stat,
+  .stat + .stat {
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 14px;
+    padding: 14px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
