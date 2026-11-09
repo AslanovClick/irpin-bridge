@@ -107,6 +107,24 @@
   color: var(--c-gray-700);
 }
 
+/* Планшет і телефон: компактніша смуга (кнопки 36px), щоб лишити більше місця під товари */
+@media (max-width: 1000px) {
+  .wrap {
+    /* 36px кнопки + 8px зверху + 4px знизу */
+    --cats-h: 48px;
+  }
+
+  .cats {
+    padding-block: 8px 4px;
+  }
+
+  .cat {
+    height: 36px;
+    padding: 0 12px;
+    font-size: var(--fs-small);
+  }
+}
+
 @media (max-width: 640px) {
   .cats {
     margin-inline: calc(var(--gutter) * -1);

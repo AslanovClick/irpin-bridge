@@ -144,14 +144,36 @@
 .pay {
   display: flex;
   gap: 8px;
+  padding: 0;
 }
 
-.pay span {
-  font-family: var(--font-heading);
-  padding: 3px 8px;
-  border: 1px solid var(--line);
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-bold);
+/* Білі «картки» з фірмовими знаками — так, як їх звикли бачити на касі */
+.payItem {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 32px;
+  padding: 0 8px;
+  background: var(--c-white);
+}
+
+.payItem svg {
+  display: block;
+  width: 100%;
+  height: 12px;
+}
+
+.payItem[data-logo="Visa"] svg {
+  height: 11px;
+}
+
+.payItem[data-logo="Mastercard"] svg {
+  height: 18px;
+}
+
+.payItem[data-logo="Apple Pay"] svg,
+.payItem[data-logo="Google Pay"] svg {
+  height: 15px;
 }
 
 @media (max-width: 1100px) {
@@ -180,5 +202,30 @@
 
   .socials {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Копірайт, cookies і знаки оплати — один під одним на всю ширину, без «драбинки» */
+  .bottom {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .legal span {
+    display: block;
+  }
+
+  .cookieLink {
+    display: inline-block;
+    margin: 8px 0 0;
+  }
+
+  .pay {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .payItem {
+    width: auto;
+    height: 40px;
   }
 }

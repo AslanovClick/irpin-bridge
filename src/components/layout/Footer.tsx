@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CONTACTS, FOOTER_COLUMNS, SOCIALS } from "@/data/site";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
+import { PayLogos } from "@/components/ui/PayLogos";
 import { CookieSettingsLink } from "./CookieConsent";
 import { ModalTrigger } from "@/components/forms/RequestModal";
 import styles from "./Footer.module.css";
@@ -89,16 +90,11 @@ export function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>
-            © 2026 IRPIN BRIDGE. ТМ належить БФ «Єдність світу».{" "}
+          <p className={styles.legal}>
+            <span>© 2026 IRPIN BRIDGE. ТМ належить БФ «Єдність світу».</span>{" "}
             <CookieSettingsLink className={styles.cookieLink}>Налаштування cookies</CookieSettingsLink>
           </p>
-          <p className={styles.pay}>
-            <span>Visa</span>
-            <span>Mastercard</span>
-            <span>Apple Pay</span>
-            <span>Google Pay</span>
-          </p>
+          <PayLogos className={styles.pay} itemClassName={styles.payItem} />
         </div>
       </div>
     </footer>

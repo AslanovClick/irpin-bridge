@@ -31,7 +31,7 @@
 .sheet {
   max-height: 100dvh;
   overflow-y: auto;
-  padding-block: 20px 28px;
+  padding-block: 0 28px;
   background: var(--c-white);
   border-bottom: 2px solid var(--c-black);
 }
@@ -41,6 +41,15 @@
 }
 
 /* ── Поле пошуку ── */
+/* Липка смуга з білим тлом: поле не їде разом зі списком, а вміст ховається під ним */
+.formBar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding-block: 20px 12px;
+  background: var(--c-white);
+}
+
 .form {
   display: flex;
   align-items: center;
@@ -119,7 +128,7 @@
 
 /* ── Тіло ── */
 .body {
-  padding-top: 24px;
+  padding-top: 12px;
 }
 
 .idle {
@@ -385,8 +394,11 @@
 @media (max-width: 800px) {
   .sheet {
     min-height: 100dvh;
-    padding-top: 12px;
     border-bottom: 0;
+  }
+
+  .formBar {
+    padding-top: 12px;
   }
 
   .form {

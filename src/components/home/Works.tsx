@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { SectionHead } from "@/components/ui/SectionHead";
 import styles from "./Works.module.css";
@@ -30,6 +30,36 @@ export function Works() {
   const [filter, setFilter] = useState<Tag | "all">("all");
   const items = filter === "all" ? WORKS : WORKS.filter((w) => w.tags.includes(filter));
 
+  /* Чи є куди гортати фільтри вліво/вправо — від цього залежить м'яке затемнення країв */
+  const scroller = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: true });
+  const measure = () => {
+    const el = scroller.current;
+    if (!el) return;
+    const start = el.scrollLeft <= 1;
+    const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+    setEdges((e) => (e.start === start && e.end === end ? e : { start, end }));
+  };
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const chip = (f: (typeof FILTERS)[number]) => (
+    <button
+      key={f.key}
+      type="button"
+      className={styles.chip}
+      aria-pressed={filter === f.key}
+      onClick={() => setFilter(f.key)}
+    >
+      {f.label}
+    </button>
+  );
+
   return (
     <section className="theme-light section" aria-labelledby="works-title">
       <div className="container">
@@ -37,19 +67,19 @@ export function Works() {
           id="works-title"
           title="Приклади робіт"
           action={
-          <div className={styles.filters} role="group" aria-label="Фільтр робіт">
-            {FILTERS.map((f) => (
-              <button
-                key={f.key}
-                type="button"
-                className={styles.chip}
-                aria-pressed={filter === f.key}
-                onClick={() => setFilter(f.key)}
+            <div className={styles.filters} role="group" aria-label="Фільтр робіт">
+              {/* «Усі» стоїть на місці, решта на телефоні гортається вбік */}
+              {chip(FILTERS[0])}
+              <div
+                ref={scroller}
+                className={styles.scroller}
+                onScroll={measure}
+                data-fade-start={!edges.start || undefined}
+                data-fade-end={!edges.end || undefined}
               >
-                {f.label}
-              </button>
-            ))}
-          </div>
+                {FILTERS.slice(1).map(chip)}
+              </div>
+            </div>
           }
         />
 

@@ -31,6 +31,7 @@ export function Collab({ products }: { products: Product[] }) {
               ratio="4 / 5"
               notch={[24, 14]}
               objectPosition="60% 20%"
+              className={styles.artistPhoto}
               sizes="(max-width: 900px) 60vw, 22vw"
             />
             <div className={styles.artistBody}>

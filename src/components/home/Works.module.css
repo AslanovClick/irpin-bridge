@@ -4,6 +4,11 @@
   border: 2px solid var(--c-black);
 }
 
+/* На десктопі всі кнопки — одна сегментована смужка */
+.scroller {
+  display: contents;
+}
+
 .chip {
   font-family: var(--font-heading);
   min-height: 40px;
@@ -93,24 +98,53 @@
   margin-top: 40px;
 }
 
+/* Телефон: «Усі» закріплена зліва, решта — окремі кнопки, що гортаються вбік до краю екрана */
 @media (max-width: 640px) {
   .filters {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    display: flex;
+    gap: 8px;
     width: 100%;
+    border: 0;
+  }
+
+  .scroller {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+    min-width: 0;
+    margin-right: calc(var(--gutter) * -1);
+    padding-right: var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* М'яке затемнення країв: кнопки плавно зникають під «Усі» і за краєм екрана, а не обрізаються */
+  .scroller {
+    --fade-l: 0px;
+    --fade-r: 0px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+  }
+
+  .scroller[data-fade-start] {
+    --fade-l: 28px;
+  }
+
+  .scroller[data-fade-end] {
+    --fade-r: 40px;
   }
 
   .chip {
-    min-width: 0;
-    height: 44px;
-    padding: 0 2px;
-    font-size: 0.75rem;
+    flex: none;
+    min-height: 0;
+    height: 36px;
+    padding: 0 14px;
+    border: 2px solid var(--c-black);
     white-space: nowrap;
-  }
-
-  .chip + .chip {
-    border-left: 1px solid var(--line);
   }
 }
 
@@ -130,19 +164,45 @@
   .item:last-child:nth-child(even) {
     grid-column: span 2;
   }
+
+  /* На малих плитках підкладка підпису — на всю ширину */
+  .item:not(.feature) .caption {
+    right: 0;
+    max-width: none;
+  }
 }
 
-@media (max-width: 520px) {
+/* Телефон: підпис під фото на всю ширину плитки — назва не закриває зображення */
+@media (max-width: 640px) {
   .grid {
-    grid-auto-rows: 170px;
-    gap: 8px;
+    grid-auto-rows: auto;
+    gap: 16px 8px;
   }
 
   .feature {
-    grid-row: span 2;
+    grid-row: auto;
+  }
+
+  .item figure {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 1;
+  }
+
+  .feature .media,
+  .item:last-child:nth-child(even) .media {
+    aspect-ratio: 16 / 10;
   }
 
   .caption {
-    padding: 8px 10px;
+    position: static;
+    flex: 1;
+    max-width: none;
+    padding: 10px 12px 12px;
   }
 }

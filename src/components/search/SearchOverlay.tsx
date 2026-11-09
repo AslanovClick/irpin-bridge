@@ -131,38 +131,41 @@ export function SearchOverlay({ ref }: { ref?: Ref<SearchOverlayHandle> }) {
     >
       <div className={styles.sheet}>
         <div className={`container ${styles.inner}`}>
-          <div className={styles.form} role="search">
-            <Icon name="search" size={24} className={styles.formIcon} />
-            <label htmlFor={`${uid}-q`} className="visually-hidden">
-              Пошук товарів
-            </label>
-            <input
-              ref={input}
-              id={`${uid}-q`}
-              type="search"
-              autoComplete="off"
-              enterKeyHint="search"
-              placeholder="Шукати футболки, худі, колекції…"
-              value={q}
-              onChange={(e) => {
-                setQ(e.target.value);
-                setActive(-1);
-              }}
-              onKeyDown={onKey}
-              role="combobox"
-              aria-expanded={shown.length > 0}
-              aria-controls={`${uid}-list`}
-              aria-activedescendant={active >= 0 ? `${uid}-opt-${active}` : undefined}
-            />
-            {q && (
-              <button type="button" className={styles.clear} onClick={() => (setQ(""), input.current?.focus())} aria-label="Стерти запит" title="Стерти запит">
-                <Icon name="eraser" size={18} />
+          {/* Поле пошуку лишається вгорі, коли гортаємо підказки й результати */}
+          <div className={styles.formBar}>
+            <div className={styles.form} role="search">
+              <Icon name="search" size={24} className={styles.formIcon} />
+              <label htmlFor={`${uid}-q`} className="visually-hidden">
+                Пошук товарів
+              </label>
+              <input
+                ref={input}
+                id={`${uid}-q`}
+                type="search"
+                autoComplete="off"
+                enterKeyHint="search"
+                placeholder="Шукати футболки, худі, колекції…"
+                value={q}
+                onChange={(e) => {
+                  setQ(e.target.value);
+                  setActive(-1);
+                }}
+                onKeyDown={onKey}
+                role="combobox"
+                aria-expanded={shown.length > 0}
+                aria-controls={`${uid}-list`}
+                aria-activedescendant={active >= 0 ? `${uid}-opt-${active}` : undefined}
+              />
+              {q && (
+                <button type="button" className={styles.clear} onClick={() => (setQ(""), input.current?.focus())} aria-label="Стерти запит" title="Стерти запит">
+                  <Icon name="eraser" size={18} />
+                </button>
+              )}
+              <kbd className={styles.kbd}>Esc</kbd>
+              <button type="button" className={styles.closeBtn} onClick={close} aria-label="Закрити пошук">
+                <Icon name="close" />
               </button>
-            )}
-            <kbd className={styles.kbd}>Esc</kbd>
-            <button type="button" className={styles.closeBtn} onClick={close} aria-label="Закрити пошук">
-              <Icon name="close" />
-            </button>
+            </div>
           </div>
 
           <div className={styles.body} aria-live="polite">

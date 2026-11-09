@@ -671,17 +671,21 @@
     display: none;
   }
 
+  /* Іконка й текст — від лівого краю, як значення в сортуванні поруч */
   .filterBtn {
     display: inline-flex;
+    justify-content: flex-start;
+    height: 36px;
   }
 
   /* Фільтри й сортування — дві рівні половини; панель прилипає під шапкою, щоб не скролити вгору за фільтрами */
   .toolbar {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px 8px;
+    min-height: 0;
     margin-inline: calc(-1 * var(--gutter));
-    padding: 10px var(--gutter);
+    padding: 4px var(--gutter) 8px;
     background: var(--bg);
     transition: box-shadow var(--dur-fast) var(--ease);
   }
@@ -697,6 +701,7 @@
 
   .sort button {
     min-width: 0;
+    height: 36px;
   }
 
   .total {

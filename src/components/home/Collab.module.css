@@ -10,6 +10,11 @@
   gap: 14px;
 }
 
+/* Фото нижче за фото товарів: ім'я й кнопка стають на рівні підписів сусідніх карток */
+.artist .artistPhoto {
+  aspect-ratio: 8 / 9;
+}
+
 .artistBody {
   display: flex;
   flex-direction: column;
@@ -63,10 +68,5 @@
   .grid > li {
     flex: 0 0 72%;
     scroll-snap-align: start;
-  }
-
-  /* У стрічці картки широкі — назва вміщається в рядок, резерв на 2 рядки не потрібен */
-  .grid > li h3 {
-    min-height: 0;
   }
 }
