@@ -32,7 +32,8 @@
   position: sticky;
   top: var(--header-h);
   z-index: 21;
-  margin-block: clamp(14px, 2vw, 26px) clamp(18px, 2.4vw, 34px);
+  /* Без нижнього відступу: панель фільтрів стоїть одразу під смугою — так само, як після прилипання, тож при скролі нічого не стрибає */
+  margin-block: clamp(14px, 2vw, 26px) 0;
   padding-block: 10px;
   background: var(--bg);
   /* Фон на всю ширину вікна, щоб картки не просвічували по боках */
