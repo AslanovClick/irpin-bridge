@@ -4,7 +4,7 @@ import Link from "next/link";
 import { artistName } from "@/data/art";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Product, ProductBadge, SizeChart } from "@/data/types";
-import { addToCart, openCartDrawer } from "@/lib/cart";
+import { addToCart } from "@/lib/cart";
 import { track } from "@/lib/analytics";
 import { availableSizes, formatPrice } from "@/lib/catalog";
 import { Button } from "@/components/ui/Button";
@@ -40,6 +40,9 @@ export function ProductView({ product, sizeChart, categoryName }: Props) {
   const chartRef = useRef<HTMLDialogElement>(null);
   const buyRef = useRef<HTMLDivElement>(null);
   const [showSticky, setShowSticky] = useState(false);
+  const [added, setAdded] = useState(false);
+  const addedTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(addedTimer.current), []);
 
   const images = useMemo(() => {
     const byColor = product.images.filter((i) => i.color === color);
@@ -78,7 +81,9 @@ export function ProductView({ product, sizeChart, categoryName }: Props) {
       image: images[0]?.src,
       placeholder: product.placeholder,
     });
-    openCartDrawer();
+    setAdded(true);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setAdded(false), 2200);
   };
 
   return (
@@ -201,8 +206,8 @@ export function ProductView({ product, sizeChart, categoryName }: Props) {
               +
             </button>
           </div>
-          <Button size="lg" arrow onClick={add} disabled={!inStock} className={styles.addBtn}>
-            Додати в кошик
+          <Button size="lg" arrow={!added} onClick={add} disabled={!inStock} className={styles.addBtn}>
+            {added ? "Додано в кошик ✓" : "Додати в кошик"}
           </Button>
         </div>
 
@@ -333,7 +338,7 @@ export function ProductView({ product, sizeChart, categoryName }: Props) {
           <p className={styles.stickyPrice}>{formatPrice(product.price)}</p>
         </div>
         <Button onClick={add} disabled={!inStock} tabIndex={showSticky ? 0 : -1}>
-          {sizeOk ? "У кошик" : "Обрати розмір"}
+          {added ? "Додано ✓" : sizeOk ? "У кошик" : "Обрати розмір"}
         </Button>
       </div>
 

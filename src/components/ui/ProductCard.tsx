@@ -50,18 +50,28 @@ export function ProductCard({ product, sizes = "(max-width: 600px) 75vw, (max-wi
             style={{ background: product.placeholder?.bg ?? "var(--c-gray-100)", color: product.placeholder?.fg ?? "var(--c-black)" }}
           >
             <Logo variant="mark" className={styles.placeholderMark} title="" />
-            <span className={styles.placeholderNote}>Фото незабаром</span>
           </div>
         )}
 
         {badge && <span className={`${styles.badge} ${styles[`badge-${badge}`]}`}>{BADGE_LABEL[badge]}</span>}
+        {/* Нижні мітки на фото — одна колонка з лівого краю: «Фото незабаром» і автор */}
+        {(!main || product.artist) && (
+          <span className={styles.tags}>
+            {!main && <span className={styles.placeholderNote}>Фото незабаром</span>}
+            {product.artist && (
+              <span className={styles.author}>
+                <span className="visually-hidden">Автор: </span>
+                {artistName(product.artist)}
+              </span>
+            )}
+          </span>
+        )}
       </Link>
 
       <div className={styles.body}>
         <h3 className={styles.title}>
           <Link href={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
-        {product.artist && <p className={styles.meta}>Автор: {artistName(product.artist)}</p>}
 
         <div className={styles.row}>
           <p className={styles.price}>
@@ -92,7 +102,10 @@ export function ProductCard({ product, sizes = "(max-width: 600px) 75vw, (max-wi
             "Немає в наявності"
           )}
         </p>
-        {product.customizable && <p className={styles.custom}>+ можна додати свій дизайн</p>}
+        {/* Рядок резервуємо завжди — так ціни й наявність стоять на одній лінії в усіх картках ряду */}
+        <p className={styles.custom} aria-hidden={!product.customizable || undefined}>
+          {product.customizable ? "+ можна додати свій дизайн" : " "}
+        </p>
       </div>
     </article>
   );

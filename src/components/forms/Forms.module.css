@@ -440,6 +440,11 @@
   min-width: 0;
 }
 
+.progress {
+  display: grid;
+  gap: 10px;
+}
+
 .stepper {
   display: grid;
   grid-auto-columns: minmax(0, 1fr);
@@ -452,90 +457,75 @@
 
 .stepper button {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
-  min-height: 64px;
-  padding: 10px 14px;
-  border-bottom: 4px solid var(--c-gray-100);
-  background: var(--c-paper);
+  padding: 0 0 2px;
   text-align: left;
-  transition:
-    border-color var(--dur-fast) var(--ease),
-    background-color var(--dur-fast) var(--ease);
 }
 
 .stepper button:disabled {
   cursor: default;
 }
 
-.stepper li[data-state="done"] button {
-  border-bottom-color: var(--c-pine);
+.stepperBar {
+  display: block;
+  height: 4px;
+  background: var(--c-gray-100);
+  transition: background-color var(--dur) var(--ease);
 }
 
-.stepper li[data-state="done"] button:hover {
-  background: var(--c-gray-50);
-}
-
-.stepper li[data-state="current"] button {
-  border-bottom-color: var(--c-black);
-  background: var(--c-white);
-  box-shadow: inset 0 0 0 2px var(--c-black);
-}
-
-.stepperNum {
-  font-family: var(--font-heading);
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 2px solid var(--c-gray-300);
-  font-weight: var(--fw-black);
-  color: var(--c-gray-500);
-}
-
-li[data-state="current"] .stepperNum {
-  border-color: var(--c-black);
-  background: var(--c-lime);
-  color: var(--c-black);
-}
-
-li[data-state="done"] .stepperNum {
-  border-color: var(--c-pine);
+li[data-state="done"] .stepperBar {
   background: var(--c-pine);
-  color: var(--c-lime);
+}
+
+li[data-state="current"] .stepperBar {
+  background: var(--c-black);
 }
 
 .stepperText {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 6px;
   min-width: 0;
   font-family: var(--font-heading);
+  font-size: var(--fs-small);
   font-weight: var(--fw-bold);
-  line-height: 1.2;
+  line-height: 1.3;
+  color: var(--c-gray-700);
+}
+
+li[data-state="current"] .stepperText {
+  color: var(--c-black);
 }
 
 li[data-state="todo"] .stepperText {
   color: var(--c-gray-500);
 }
 
-.stepperOf {
-  font-size: var(--fs-caption);
-  font-weight: var(--fw-medium);
-  letter-spacing: var(--ls-caps);
-  text-transform: uppercase;
+li[data-state="done"] .stepperText svg {
+  flex: none;
+  color: var(--c-pine);
+}
+
+li[data-state="done"] button:hover .stepperText {
+  color: var(--c-pine);
+}
+
+.stepperNum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* «Крок 2 з 3 · Назва» — лише на телефоні, де назви під смугою не вміщаються */
+.stepperNow {
+  display: none;
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
   color: var(--c-gray-700);
 }
 
-li[data-state="todo"] .stepperOf {
-  color: var(--c-gray-500);
-}
-
-/* «· 1 / 3» — лише на мобільному, де видно назву тільки поточного кроку */
-.stepperCount {
-  display: none;
+.stepperNow strong {
+  color: var(--c-black);
 }
 
 .restored {
@@ -562,9 +552,9 @@ li[data-state="todo"] .stepperOf {
   gap: 24px;
   min-width: 0;
   margin: 0;
-  padding: 24px 0 0;
+  /* Без лінії зверху — крок і так відділяє смуга прогресу */
+  padding: 8px 0 0;
   border: 0;
-  border-top: 2px solid var(--c-black);
   animation: stepIn var(--dur) var(--ease);
 }
 
@@ -586,8 +576,6 @@ li[data-state="todo"] .stepperOf {
   padding: 0;
   font-size: var(--fs-h3);
   font-weight: var(--fw-black);
-  letter-spacing: var(--ls-heading);
-  text-transform: uppercase;
 }
 
 .stepTitle + * {
@@ -616,25 +604,27 @@ li[data-state="todo"] .stepperOf {
 }
 
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 
-.back {
-  font-family: var(--font-heading);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 48px;
-  font-weight: var(--fw-bold);
+.nav > * {
+  width: 100%;
 }
 
-.back:hover {
-  color: var(--c-pine);
+/* Перший крок: «Далі» лишається у правій половині, як і на наступних */
+.nav[data-first] .nextBtn {
+  grid-column: 2;
+}
+
+/* Стрілка й текст «Назад» — в один рядок */
+.back > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Бічна панель */
@@ -653,8 +643,6 @@ li[data-state="todo"] .stepperOf {
   font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: var(--fw-black);
-  letter-spacing: var(--ls-heading);
-  text-transform: uppercase;
 }
 
 .asideSteps {
@@ -762,31 +750,17 @@ li[data-state="todo"] .asideText strong {
 }
 
 @media (max-width: 640px) {
-  /* Мобільний: номери кроків + назва лише поточного */
-  .stepper {
-    grid-auto-columns: auto;
-    grid-template-columns: none;
-  }
-
-  .stepper li[data-state="current"] {
-    flex: 1;
-  }
-
-  .stepper {
-    display: flex;
-  }
-
-  .stepper button {
-    min-height: 56px;
-    padding: 8px 10px;
-  }
-
-  .stepper li:not([data-state="current"]) .stepperText {
+  /* Мобільний: лише смуга й підпис поточного кроку */
+  .stepperText {
     display: none;
   }
 
-  .stepperCount {
-    display: inline;
+  .stepper button {
+    padding: 0;
+  }
+
+  .stepperNow {
+    display: block;
   }
 
   .grid2 {
@@ -801,12 +775,12 @@ li[data-state="todo"] .asideText strong {
     font-size: var(--fs-h4);
   }
 
-  .nav > :last-child {
-    flex: 1;
+  .nav {
+    gap: 8px;
   }
 
-  .nav > span:empty {
-    display: none;
+  .nav[data-first] .nextBtn {
+    grid-column: 1 / -1;
   }
 
   .review > div {

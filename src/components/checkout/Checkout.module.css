@@ -37,7 +37,6 @@
   align-items: center;
   gap: 14px;
   font-size: var(--fs-h4);
-  text-transform: uppercase;
 }
 
 .stepTitle span {
@@ -483,7 +482,6 @@
 
 .summaryHead h2 {
   font-size: var(--fs-h4);
-  text-transform: uppercase;
 }
 
 .summaryHead a {
@@ -554,7 +552,6 @@
   font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: var(--fw-black);
-  text-transform: uppercase;
 }
 
 .payingMark {

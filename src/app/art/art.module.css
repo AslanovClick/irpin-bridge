@@ -233,7 +233,6 @@
   display: block;
   margin-bottom: 4px;
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 /* Міні-блок автора на сторінці колекції */
@@ -339,5 +338,79 @@
     padding: 10px 0;
     border-left: 0;
     border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ── CTA «Хочете власну колекцію?» ── */
+.ctaGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+}
+
+.ctaMain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.ctaSteps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--fg);
+}
+
+.ctaSteps li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ctaSteps li > span:last-child {
+  display: grid;
+  gap: 2px;
+  color: var(--fg-muted);
+}
+
+.ctaSteps strong {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  color: var(--fg);
+}
+
+.ctaNum {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--c-orange);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .ctaGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* На телефоні кнопка — після кроків, у самому низу */
+  .ctaMain {
+    display: contents;
+  }
+
+  .ctaMain > a {
+    order: 2;
+    width: 100%;
+  }
+
+  .ctaSteps li {
+    grid-template-columns: 44px minmax(0, 1fr);
+    padding: 14px 0;
   }
 }

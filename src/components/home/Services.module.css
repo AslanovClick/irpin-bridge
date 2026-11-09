@@ -55,8 +55,6 @@
 .title {
   font-size: var(--fs-h3);
   line-height: 1;
-  letter-spacing: var(--ls-heading);
-  text-transform: uppercase;
 }
 
 .text {
@@ -146,15 +144,27 @@
 @media (max-width: 560px) {
   .row {
     grid-template-columns: 88px minmax(0, 1fr);
+    /* Назва й ціна — щільною парою по центру висоти мініатюри, без розтягування між ними */
+    grid-template-rows: 1fr 1fr auto;
     grid-template-areas:
       "thumb title"
       "thumb price"
       "text text";
+    row-gap: 4px;
     padding-block: 20px;
   }
 
+  .title {
+    align-self: end;
+  }
+
+  .price {
+    align-self: start;
+    margin-top: 2px;
+  }
+
   .text {
-    margin-top: 8px;
+    margin-top: 10px;
   }
 
   .go {

@@ -90,6 +90,8 @@ export function addToCart(item: CartItem) {
       ? state.items.map((i) => (itemKey(i) === k ? { ...i, qty: clampQty(i.qty + item.qty, i.max) } : i))
       : [...state.items, { ...item, qty: clampQty(item.qty, item.max) }],
   });
+  // Кошик не відкриваємо — показуємо коротке сповіщення (CartToast)
+  window.dispatchEvent(new CustomEvent<CartAddedDetail>(CART_ADDED_EVENT, { detail: { name: item.name, size: item.size, qty: item.qty } }));
 }
 
 export function setQty(key: string, qty: number) {
@@ -125,6 +127,8 @@ export function removePromo() {
 /* ── Відкриття міні-кошика з будь-якого місця ── */
 
 export const CART_OPEN_EVENT = "ib:cart-open";
+export const CART_ADDED_EVENT = "ib:cart-added";
+export type CartAddedDetail = { name: string; size: string; qty: number };
 export const openCartDrawer = () => window.dispatchEvent(new Event(CART_OPEN_EVENT));
 
 /* ── Хуки й підсумки ── */

@@ -52,7 +52,6 @@
 
 .cHead h3 {
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 .cHead p {

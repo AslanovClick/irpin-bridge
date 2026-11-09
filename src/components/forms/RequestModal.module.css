@@ -55,7 +55,6 @@
 .head h2 {
   font-size: var(--fs-h3);
   line-height: var(--lh-tight);
-  text-transform: uppercase;
 }
 
 .head p {
@@ -73,7 +72,6 @@
 .done h2 {
   font-size: var(--fs-h3);
   line-height: var(--lh-tight);
-  text-transform: uppercase;
 }
 
 .done p:not(.doneNum) {

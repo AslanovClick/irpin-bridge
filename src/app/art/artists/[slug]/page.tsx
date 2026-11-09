@@ -10,6 +10,12 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHead } from "@/components/ui/SectionHead";
 import styles from "../../art.module.css";
 
+const CTA_STEPS: [string, string][] = [
+  ["Надсилаєте роботи", "Портфоліо, кілька робіт або просто ідею."],
+  ["Обираємо разом", "Куратор підкаже, що найкраще ляже на одяг."],
+  ["Випускаємо колекцію", "Ваше ім’я — на сторінці колекції й кожній речі."],
+];
+
 export async function generateStaticParams() {
   return ARTISTS.map((a) => ({ slug: a.slug }));
 }
@@ -101,17 +107,32 @@ export default async function Page({ params }: PageProps<"/art/artists/[slug]">)
       )}
 
       <section className="theme-sand section" aria-labelledby="a-cta-title">
-        <div className="container">
-          <SectionHead
-            id="a-cta-title"
-            title="Хочете власну колекцію?"
-            lead="Шукаємо митців для нових колаборацій — від однієї роботи до цілої серії."
-            action={
-              <Button href="/art#collab" size="lg" arrow>
-                Запропонувати співпрацю
-              </Button>
-            }
-          />
+        <div className={`container ${styles.ctaGrid}`}>
+          <div className={styles.ctaMain}>
+            <SectionHead
+              flush
+              id="a-cta-title"
+              title="Хочете власну колекцію?"
+              lead="Шукаємо митців для нових колаборацій — від однієї роботи до цілої серії."
+            />
+            <Button href="/art#collab" size="lg" arrow>
+              Запропонувати співпрацю
+            </Button>
+          </div>
+          {/* Як проходить співпраця — три кроки замість порожнього місця праворуч */}
+          <ol className={styles.ctaSteps} aria-label="Як проходить співпраця">
+            {CTA_STEPS.map(([title, text], i) => (
+              <li key={title}>
+                <span className={styles.ctaNum} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>
+                  <strong>{title}</strong>
+                  {text}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </>

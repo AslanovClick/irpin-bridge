@@ -164,6 +164,19 @@
   padding: 14px;
   border-top: 1px solid var(--line);
   font-weight: var(--fw-bold);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.dropAll svg {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.dropAll:hover {
+  background: var(--surface);
+}
+
+.dropAll:hover svg {
+  transform: translateX(4px);
 }
 
 /* ── Дії праворуч ── */
@@ -408,10 +421,10 @@
 .mSecondary a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   height: 100%;
   min-height: 64px;
-  padding: 10px 12px;
+  padding: 10px;
   border: 1px solid var(--c-gray-300);
   background: var(--c-paper);
   transition: border-color var(--dur-fast) var(--ease);
@@ -426,8 +439,8 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: var(--c-gray-100);
 }
 
@@ -444,8 +457,11 @@
 
 .mSecText strong {
   font-family: var(--font-heading);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.2;
+  /* Довгі слова («Повернення») не вилазять за рамку плитки на вузьких екранах */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .mSecText span {
@@ -468,7 +484,6 @@
   font-size: 1.25rem;
   font-weight: var(--fw-black);
   line-height: 1.2;
-  text-transform: uppercase;
 }
 
 .mContacts {

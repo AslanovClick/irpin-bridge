@@ -78,7 +78,6 @@
 
 .techBody h3 {
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 .techBody p {
@@ -142,7 +141,6 @@
 .bentoOverlay h3 {
   max-width: 20ch;
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 .bentoOverlay p {

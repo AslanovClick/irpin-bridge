@@ -1,4 +1,6 @@
 .wrap {
+  /* Висота липкої смуги категорій: 44px кнопки + 2×10px відступи. Панель фільтрів прилипає одразу під нею */
+  --cats-h: 64px;
   padding-block: clamp(20px, 2.5vw, 32px) var(--section-y);
 }
 
@@ -27,7 +29,15 @@
 
 /* Категорії — горизонтальна стрічка, на мобільному гортається */
 .cats {
-  margin-block: clamp(24px, 3vw, 36px) clamp(28px, 3.4vw, 44px);
+  position: sticky;
+  top: var(--header-h);
+  z-index: 21;
+  margin-block: clamp(14px, 2vw, 26px) clamp(18px, 2.4vw, 34px);
+  padding-block: 10px;
+  background: var(--bg);
+  /* Фон на всю ширину вікна, щоб картки не просвічували по боках */
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
 }
 
 .cats ul {

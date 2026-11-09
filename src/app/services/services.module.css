@@ -40,7 +40,6 @@
 
 .cardTitle {
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 .cardText {

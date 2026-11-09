@@ -3,7 +3,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  /* Від фото до назви завжди менше, ніж між картками (--gap), — інакше назва «відклеюється» від свого фото */
+  gap: clamp(8px, calc(var(--gap) - 6px), 14px);
   min-width: 0;
 }
 
@@ -41,6 +42,8 @@
   inset: 0;
   display: grid;
   place-items: center;
+  /* Знак трохи вище центру — внизу місце для міток */
+  padding-bottom: 12%;
 }
 
 .placeholderMark {
@@ -54,14 +57,18 @@
 
 .placeholderNote {
   font-family: var(--font-heading);
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  padding: 3px 8px;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* Та сама висота, що в «Хіт» і плашки автора */
+  padding: 5px 9px 4px;
   background: rgb(249 249 249 / 0.92);
+  box-shadow: inset 0 0 0 1px rgb(17 17 17 / 0.1);
   color: var(--c-black);
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
+  line-height: 1.2;
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
 }
@@ -92,17 +99,61 @@
   background: var(--c-orange);
 }
 
+/* Нижні мітки — колонка від лівого краю, як «Хіт / Новинка» зверху */
+.tags {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* Автор колекції */
+.author {
+  font-family: var(--font-heading);
+  max-width: 100%;
+  padding: 5px 9px 4px;
+  overflow: hidden;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Опис: ціна й наявність тримаються одразу під назвою (без порожнього місця, якщо в сусідній картці назва у 2 рядки) */
 .body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+}
+
+.row {
+  margin-top: 6px;
+}
+
+.row + .meta {
+  margin-top: 6px;
+}
+
+.custom {
+  margin-top: 2px;
 }
 
 .title {
   font-size: var(--fs-h4);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   line-height: var(--lh-snug);
   letter-spacing: var(--ls-heading);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 .title a:hover {
@@ -113,19 +164,23 @@
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 6px 12px;
 }
 
 .price {
   font-family: var(--font-heading);
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  flex-wrap: wrap;
+  column-gap: 8px;
   font-size: 1.125rem;
   font-weight: var(--fw-black);
   letter-spacing: 0;
+  /* Ціну не рвемо між цифрами й ₴; стара ціна за браком місця переходить нижче */
+  white-space: nowrap;
 }
 
 .oldPrice {
@@ -154,6 +209,7 @@
 }
 
 .custom {
+  min-height: 1.5em;
   font-size: var(--fs-caption);
   color: var(--fg-muted, var(--c-gray-700));
 }
@@ -171,4 +227,54 @@
 
 .onColor .swatch {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4);
+}
+
+/* Телефон (дві колонки): дрібніший шрифт, щоб довгі слова в назві вміщалися */
+@media (max-width: 760px) {
+  /* Тут назви часто в 2 рядки — резервуємо обидва, щоб ціни в ряду не йшли «драбинкою» */
+  .title {
+    font-size: 0.875rem;
+    min-height: calc(2em * var(--lh-snug));
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .oldPrice {
+    font-size: var(--fs-caption);
+  }
+
+  .meta {
+    font-size: var(--fs-caption);
+  }
+
+  .custom {
+    font-size: 0.6875rem;
+  }
+
+  .swatch {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Мітки на фото — компактніші й завжди в один рядок */
+  .badge,
+  .placeholderNote,
+  .author {
+    padding: 4px 7px 3px;
+    font-size: 0.6875rem;
+  }
+
+  .tags {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    gap: 4px;
+  }
+
+  .badge {
+    top: 8px;
+    left: 8px;
+  }
 }

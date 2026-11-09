@@ -331,7 +331,6 @@
   align-items: center;
   gap: 10px;
   font-size: var(--fs-h4);
-  text-transform: uppercase;
 }
 
 .drawerHead h2 span {
@@ -369,8 +368,10 @@
 }
 
 .drawerEmpty {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 12px;
   padding: 40px 24px;
@@ -389,8 +390,6 @@
   font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: var(--fw-black);
-  text-transform: uppercase;
-  letter-spacing: var(--ls-heading);
 }
 
 /* ── Сторінка кошика ── */
@@ -441,7 +440,6 @@
 
 .summaryTitle {
   font-size: var(--fs-h4);
-  text-transform: uppercase;
 }
 
 .pay {

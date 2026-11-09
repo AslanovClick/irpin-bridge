@@ -60,6 +60,8 @@ export function CatalogShell({
   const active = activeCount(filters);
   const dialogRef = useRef<HTMLDialogElement>(null);
   useCloseOnDesktop(dialogRef);
+  const [sentinel, stuck] = useStuck();
+  const [sideScroll, sideMore, sideScrolled] = useMoreBelow();
 
   const reset = () => onChange?.({ ...DEFAULT, sort: filters.sort });
 
@@ -74,11 +76,19 @@ export function CatalogShell({
             </button>
           )}
         </div>
-        <FilterPanel value={filters} facets={facets} onChange={onChange} idPrefix="side" />
+        {/* Прокручувана частина: тонкий скролбар + м’яке затухання знизу, поки є що гортати */}
+        <div ref={sideScroll} className={styles.sidebarScroll} data-scrolled={sideScrolled || undefined}>
+          <FilterPanel value={filters} facets={facets} onChange={onChange} idPrefix="side" />
+        </div>
+        <span className={styles.sidebarFade} data-show={sideMore || undefined} aria-hidden="true">
+          <Icon name="chevron" size={18} />
+        </span>
       </aside>
 
       <div className={styles.main}>
-        <div className={styles.toolbar}>
+        {/* Маячок: коли він іде під шапку — панель фільтрів «прилипла», додаємо тінь */}
+        <div ref={sentinel} aria-hidden="true" />
+        <div className={styles.toolbar} data-stuck={stuck || undefined}>
           <button
             type="button"
             className={styles.filterBtn}
@@ -250,6 +260,50 @@ function ActiveChips({
 }
 
 /** Закриваємо діалог, якщо екран розширили до десктопу */
+/** Чи є ще вміст нижче в прокручуваному блоці — для підказки-затухання */
+function useMoreBelow() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [more, setMore] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const check = () => {
+      setMore(el.scrollHeight - el.scrollTop - el.clientHeight > 8);
+      setScrolled(el.scrollTop > 4);
+    };
+    check();
+    el.addEventListener("scroll", check, { passive: true });
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+    return () => {
+      el.removeEventListener("scroll", check);
+      ro.disconnect();
+    };
+  }, []);
+  return [ref, more, scrolled] as const;
+}
+
+/** Чи прилипла панель до шапки (на мобільному вона sticky) */
+function useStuck() {
+  const sentinel = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState(false);
+  useEffect(() => {
+    const el = sentinel.current;
+    if (!el) return;
+    // Відступ прилипання панелі = шапка + смуга категорій (береться з її власного top)
+    const bar = el.nextElementSibling;
+    const top = (bar && parseFloat(getComputedStyle(bar).top)) || 72;
+    const io = new IntersectionObserver(([e]) => setValue(!e.isIntersecting && e.boundingClientRect.top < top + 1), {
+      rootMargin: `-${top + 1}px 0px 0px 0px`,
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return [sentinel, value] as const;
+}
+
 function useCloseOnDesktop(ref: RefObject<HTMLDialogElement | null>) {
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1001px)");

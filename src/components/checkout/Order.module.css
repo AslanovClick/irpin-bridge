@@ -81,7 +81,6 @@
 
 .cardTitle {
   font-size: var(--fs-h4);
-  text-transform: uppercase;
 }
 
 .muted {

@@ -9,7 +9,7 @@ import { Logo } from "@/components/ui/Logo";
 import { CartLine, MissionNote, Totals } from "./CartParts";
 import styles from "./Cart.module.css";
 
-/** Міні-кошик: виїжджає праворуч після «Додати в кошик» або кліку по іконці в шапці */
+/** Міні-кошик: виїжджає праворуч після кліку по іконці в шапці або кнопки в сповіщенні про додавання */
 export function CartDrawer() {
   const ref = useRef<HTMLDialogElement>(null);
   const items = useCart();
@@ -46,17 +46,22 @@ export function CartDrawer() {
         </div>
 
         {items.length === 0 ? (
-          <div className={styles.drawerEmpty}>
-            <Logo variant="mark" title="" className={styles.emptyMark} />
-            <p className={styles.emptyTitle}>Кошик порожній</p>
-            <p>Подивіться хіти каталогу або створіть річ зі своїм дизайном.</p>
-            <Button href="/catalog" arrow block>
-              До каталогу
-            </Button>
-            <Button href="/customize" variant="link">
-              Створити свій мерч
-            </Button>
-          </div>
+          <>
+            <div className={styles.drawerEmpty}>
+              <Logo variant="mark" title="" className={styles.emptyMark} />
+              <p className={styles.emptyTitle}>Кошик порожній</p>
+              <p>Подивіться хіти каталогу або створіть річ зі своїм дизайном.</p>
+            </div>
+            {/* Дії внизу — як у заповненому кошику, щоб на телефоні легко дотягнутися */}
+            <div className={styles.drawerFoot}>
+              <Button href="/catalog" size="lg" arrow block>
+                До каталогу
+              </Button>
+              <Button href="/customize" variant="outline" block>
+                Створити свій мерч
+              </Button>
+            </div>
+          </>
         ) : (
           <>
             <ul role="list" className={styles.drawerList}>
@@ -66,13 +71,13 @@ export function CartDrawer() {
             </ul>
             <div className={styles.drawerFoot}>
               <Totals deliveryNote={false} />
+              <MissionNote />
               <Button href="/checkout" size="lg" arrow block>
                 Оформити замовлення
               </Button>
               <Button href="/cart" variant="outline" block>
                 Переглянути кошик
               </Button>
-              <MissionNote />
             </div>
           </>
         )}

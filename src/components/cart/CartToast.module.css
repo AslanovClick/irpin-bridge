@@ -1,0 +1,108 @@
+/* Під шапкою праворуч; на телефоні — на всю ширину, щоб не перекривати липку кнопку «У кошик» внизу */
+.region {
+  position: fixed;
+  top: calc(var(--header-h) + 12px);
+  right: var(--gutter);
+  z-index: 48;
+  width: min(420px, calc(100% - 2 * var(--gutter)));
+  pointer-events: none;
+}
+
+.toast {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px 12px 14px;
+  background: var(--c-black);
+  color: var(--c-white);
+  box-shadow: 0 12px 32px rgb(17 17 17 / 0.22);
+  pointer-events: auto;
+  animation: toast-in 240ms var(--ease) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  background: var(--c-lime);
+  color: var(--c-black);
+}
+
+.text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+  font-size: var(--fs-small);
+  line-height: 1.35;
+}
+
+.text strong {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+}
+
+.text span {
+  overflow: hidden;
+  color: rgb(249 249 249 / 0.8);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.open {
+  padding: 8px 10px;
+  color: var(--c-lime);
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.open:hover {
+  text-decoration-thickness: 2px;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: rgb(249 249 249 / 0.8);
+}
+
+.close:hover {
+  color: var(--c-white);
+}
+
+@media (max-width: 480px) {
+  .toast {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .open {
+    grid-column: 2 / -1;
+    justify-self: start;
+    padding: 0;
+  }
+
+  .close {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}

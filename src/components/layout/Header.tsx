@@ -9,6 +9,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { SearchOverlay, type SearchOverlayHandle } from "@/components/search/SearchOverlay";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { CartToast } from "@/components/cart/CartToast";
 import { RequestModal } from "@/components/forms/RequestModal";
 import { openRequestModal } from "@/lib/requests";
 import { openCartDrawer, useCartCount } from "@/lib/cart";
@@ -271,9 +272,6 @@ export function Header() {
 
             <div className={`theme-lime ${styles.mFoot}`}>
               <p className={styles.mFootTitle}>Маєте ідею? Розрахуємо вартість</p>
-              <Button href="/#request" block arrow>
-                Залишити заявку
-              </Button>
               <div className={styles.mContacts}>
                 <a href={CONTACTS.phoneHref}>
                   <Icon name="phone" size={18} /> {CONTACTS.phone}
@@ -298,11 +296,15 @@ export function Header() {
                   ))}
                 </ul>
               </div>
+              <Button href="/#request" block arrow>
+                Залишити заявку
+              </Button>
             </div>
           </nav>
         </div>
       <SearchOverlay ref={searchRef} />
       <CartDrawer />
+      <CartToast />
       <RequestModal />
     </>
   );

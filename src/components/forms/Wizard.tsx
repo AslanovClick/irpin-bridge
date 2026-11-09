@@ -25,8 +25,6 @@ type Props = {
   onReset?: () => void;
 };
 
-const STATE_LABEL = { done: "Готово", current: "Зараз", todo: "Далі" } as const;
-
 /** Покрокова форма: прогрес, «Назад / Далі», перевірка кожного кроку, бічна панель з підсумком */
 export function Wizard({ steps, onSubmit, submitLabel = "Надіслати заявку", aside, restored, onReset }: Props) {
   const [current, setCurrent] = useState(0);
@@ -72,34 +70,33 @@ export function Wizard({ steps, onSubmit, submitLabel = "Надіслати за
   return (
     <div ref={top} className={styles.wizard}>
       <form className={styles.wizardMain} onSubmit={next} noValidate>
-        {/* Прогрес: кроки з назвами — видно, де ви і що попереду */}
-        <ol className={styles.stepper} aria-label="Кроки заявки">
-          {steps.map((s, i) => {
-            const state = i < current ? "done" : i === current ? "current" : "todo";
-            return (
-              <li key={s.id} data-state={state}>
-                <button
-                  type="button"
-                  onClick={() => i <= maxReached && goTo(i)}
-                  disabled={i > maxReached}
-                  aria-current={i === current ? "step" : undefined}
-                >
-                  <span className={styles.stepperNum}>{state === "done" ? <Icon name="check" size={16} /> : i + 1}</span>
-                  <span className={styles.stepperText}>
-                    <span className={styles.stepperOf}>
-                      {STATE_LABEL[state]}
-                      <span className={styles.stepperCount}>
-                        {" "}
-                        · {i + 1} / {steps.length}
-                      </span>
+        {/* Прогрес: тонка смуга з сегментами-кроками; назви — під смугою (на телефоні — лише поточний крок) */}
+        <div className={styles.progress}>
+          <ol className={styles.stepper} aria-label="Кроки заявки">
+            {steps.map((s, i) => {
+              const state = i < current ? "done" : i === current ? "current" : "todo";
+              return (
+                <li key={s.id} data-state={state}>
+                  <button
+                    type="button"
+                    onClick={() => i <= maxReached && goTo(i)}
+                    disabled={i > maxReached}
+                    aria-current={i === current ? "step" : undefined}
+                  >
+                    <span className={styles.stepperBar} aria-hidden="true" />
+                    <span className={styles.stepperText}>
+                      {state === "done" ? <Icon name="check" size={14} /> : <span className={styles.stepperNum}>{i + 1}.</span>}
+                      {s.title}
                     </span>
-                    {s.title}
-                  </span>
-                </button>
-              </li>
-            );
-          })}
-        </ol>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+          <p className={styles.stepperNow} aria-hidden="true">
+            Крок {current + 1} з {steps.length} · <strong>{step.title}</strong>
+          </p>
+        </div>
 
         {restored && current === 0 && (
           <div className={styles.restored}>
@@ -125,16 +122,15 @@ export function Wizard({ steps, onSubmit, submitLabel = "Надіслати за
           </p>
         )}
 
-        <div className={styles.nav}>
-          {current > 0 ? (
-            <button type="button" className={styles.back} onClick={() => goTo(current - 1)}>
-              <Icon name="arrow" size={18} style={{ transform: "rotate(180deg)" }} />
+        {/* «Назад» і «Далі» — дві рівні половини */}
+        <div className={styles.nav} data-first={current === 0 || undefined}>
+          {current > 0 && (
+            <Button variant="outline" size="lg" onClick={() => goTo(current - 1)} className={styles.back}>
+              <Icon name="arrow" size={20} style={{ transform: "rotate(180deg)" }} />
               Назад
-            </button>
-          ) : (
-            <span />
+            </Button>
           )}
-          <Button type="submit" size="lg" arrow disabled={sending}>
+          <Button type="submit" size="lg" arrow disabled={sending} className={styles.nextBtn}>
             {sending ? "Надсилаємо…" : last ? submitLabel : "Далі"}
           </Button>
         </div>

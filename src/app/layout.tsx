@@ -3,6 +3,7 @@ import { Inter_Tight, Mulish } from "next/font/google";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FooterGate } from "@/components/layout/FooterGate";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { Analytics } from "@/components/layout/Analytics";
 import { SITE_URL } from "@/data/site";
@@ -52,7 +53,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AnnouncementBar />
         <Header />
         <main id="main">{children}</main>
-        <Footer />
+        <FooterGate>
+          <Footer />
+        </FooterGate>
         <CookieConsent />
         <Analytics />
       </body>

@@ -8,11 +8,76 @@
 
 .sidebar {
   position: sticky;
-  top: calc(var(--header-h) + 24px);
-  max-height: calc(100dvh - var(--header-h) - 48px);
+  /* Той самий відступ, що в панелі сортування — «Фільтри» й сортування прилипають на одній лінії */
+  top: calc(var(--header-h) + var(--cats-h, 0px));
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--header-h) - var(--cats-h, 0px) - 16px);
+}
+
+/* Заголовок «Фільтри» стоїть на місці, гортається лише список фільтрів */
+.sidebarScroll {
+  flex: 1;
+  min-height: 0;
+  /* Скролбар — у полі праворуч, ширина фільтрів не зменшується */
+  margin-right: -16px;
+  padding-right: 6px;
+  padding-bottom: 24px;
   overflow-y: auto;
-  padding-right: 4px;
-  scrollbar-width: none;
+  overscroll-behavior: contain;
+  /* Тонкий видимий скролбар — підказка, що всередині є прокрутка */
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-gray-300) transparent;
+}
+
+/* Прогорнули — верхній край теж м’яко затухає під заголовком */
+.sidebarScroll[data-scrolled] {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 20px);
+}
+
+.sidebarScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebarScroll::-webkit-scrollbar-thumb {
+  background: var(--c-gray-300);
+}
+
+/* М’яке затухання знизу з маленькою стрілкою, поки нижче є ще фільтри */
+.sidebarFade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: end center;
+  height: 72px;
+  padding-bottom: 6px;
+  background: linear-gradient(to bottom, rgb(249 249 249 / 0), var(--bg) 78%);
+  color: var(--c-gray-700);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.sidebarFade[data-show] {
+  opacity: 1;
+}
+
+.sidebarFade svg {
+  animation: hint-bob 1.8s var(--ease) infinite;
+}
+
+@keyframes hint-bob {
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebarFade svg {
+    animation: none;
+  }
 }
 
 .sidebarHead,
@@ -26,6 +91,7 @@
 
 /* Шапка фільтрів і панель над сіткою — однакової висоти, лінії на одному рівні */
 .sidebarHead {
+  flex: none;
   height: 60px;
   padding-bottom: 6px;
 }
@@ -33,8 +99,6 @@
 .sidebarTitle {
   font-size: var(--fs-h4);
   font-weight: var(--fw-black);
-  text-transform: uppercase;
-  letter-spacing: var(--ls-heading);
 }
 
 .resetLink {
@@ -341,14 +405,18 @@
   outline-offset: 2px;
 }
 
-/* ── Панель інструментів над сіткою ── */
+/* ── Панель інструментів над сіткою — прилипає під смугою категорій ── */
 .toolbar {
+  position: sticky;
+  top: calc(var(--header-h) + var(--cats-h, 0px));
+  z-index: 20;
   display: flex;
   align-items: center;
   gap: 12px 20px;
   min-height: 60px;
   padding-bottom: 6px;
   border-bottom: 2px solid var(--c-black);
+  background: var(--bg);
 }
 
 .filterBtn {
@@ -413,12 +481,32 @@
 
 /* ── Сітка ── */
 .grid {
+  --row-gap: 56px;
+  --col-gap: var(--gap);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px var(--gap);
+  gap: var(--row-gap) var(--col-gap);
   margin-top: 28px;
+  /* Обрізає лінію під останнім рядом і хвостики ліній за краями сітки */
+  overflow: clip;
   padding: 0;
   list-style: none;
+}
+
+/* Горизонтальні розділювачі між рядами: лінія під кожною карткою посередині проміжку.
+   Лінію малює ряд зверху — тож вона суцільна, навіть якщо останній ряд неповний; під останнім рядом її обрізає overflow */
+.grid > li {
+  position: relative;
+}
+
+.grid > li::after {
+  content: "";
+  position: absolute;
+  bottom: calc(var(--row-gap) / -2);
+  left: calc(var(--col-gap) / -2);
+  right: calc(var(--col-gap) / -2);
+  border-top: 1px solid var(--line);
+  pointer-events: none;
 }
 
 .promoCell {
@@ -456,7 +544,6 @@
   font-size: var(--fs-h3);
   font-weight: var(--fw-black);
   line-height: 1.1;
-  text-transform: uppercase;
 }
 
 .promoText {
@@ -493,7 +580,6 @@
 
 .empty h2 {
   font-size: var(--fs-h3);
-  text-transform: uppercase;
 }
 
 .empty p {
@@ -589,12 +675,20 @@
     display: inline-flex;
   }
 
-  /* Фільтри й сортування — дві рівні половини */
+  /* Фільтри й сортування — дві рівні половини; панель прилипає під шапкою, щоб не скролити вгору за фільтрами */
   .toolbar {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    padding-bottom: 12px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 10px var(--gutter);
+    background: var(--bg);
+    transition: box-shadow var(--dur-fast) var(--ease);
+  }
+
+  .toolbar[data-stuck] {
+    border-bottom-color: transparent;
+    box-shadow: 0 10px 24px rgb(17 17 17 / 0.1), 0 1px 0 var(--line);
   }
 
   .sort {
@@ -617,8 +711,9 @@
 
 @media (max-width: 760px) {
   .grid {
+    --row-gap: 40px;
+    --col-gap: 16px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px 12px;
   }
 
 
